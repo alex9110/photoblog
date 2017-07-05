@@ -1,0 +1,7 @@
+# коментарий
+folderName/
+node_modules/
+
+.bowerrc
+gulpfile.js
+package.json

@@ -1,0 +1,189 @@
+@font-face{
+    font-family: "RobotoRegular";
+    src: local('RobotoRegular');
+    src : url("../fonts/Roboto/Roboto-Regular.ttf");
+}
+$bl: 1px solid #000;
+$red: 1px solid red;
+$w:100%;
+*{
+	outline: 0;
+	padding: 0;
+	margin: 0;
+	border: 0 none;
+	text-decoration: none;
+	box-sizing: border-box;
+	list-style: none;
+	font-family: RobotoRegular;
+	color: inherit; 
+}
+
+body{
+	background-color: #fff;
+	// overflow: hidden;
+}
+.wrapper{
+	// outline: $bl;
+	max-width: 95%;
+	margin: auto;
+	background-color: #fff;
+	// overflow: hidden;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+header{
+	background-color: #F5F9FF;
+	position: relative;
+	margin-bottom: 20px;
+	height: 100px;
+	overflow: hidden;
+	width: 100%;
+
+}
+//уберём касячки с хедероа)))
+header:before{
+	content: "";
+	display: block;
+	position: absolute;
+	background-color: #fff;
+	width: 0.5%;
+	height: 100%;
+	left: 0px;
+}
+header:after{
+	content: "";
+	background-color: #fff;
+	display: block;
+	position: absolute;
+	width: 0.5%;
+	height: 100%;
+	right: 0px;
+	top:0px;
+}
+.header_box{
+	width: 90%;
+	margin: auto;
+	overflow: hidden;
+}
+.logo{
+	margin-top: 10px;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
+nav{
+	float: right;
+	li{
+		float: left;
+		margin-left: 20px;
+	}
+}
+.social{
+	float: left;	
+}
+.social ul{
+	overflow: hidden;
+
+	li a{
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+}
+.social li{
+	outline: $bl;
+	margin: 5px;
+	height: 20px;
+	width: 20px;
+	float: left;
+}
+.content{
+	width: 100%;
+	min-height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+// по умолчанию всем//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//
+.gallery{
+	overflow: hidden;
+	ul{
+		overflow: hidden;
+		clear: both;
+		li{
+			position: relative;
+			float: left;
+		}
+	}
+}
+.gallery-box {
+	background-color: #ccc;
+	margin: 0.5%;
+	box-sizing: border-box;
+	float: left;
+	overflow: hidden;
+	position: relative;
+	width: 24%;
+}
+// @media (max-width:  500px) { .gallery-box { width: 99%; } }
+// @media (min-width:  768px) { .gallery-box { width: 33.33333333%; } }
+// @media (min-width:  992px) { .gallery-box { width: 25%; } }
+// @media (min-width: 1200px) { .gallery-box { width: 16.66666667%; } }
+.gallery-box .heigth {
+    height: 0;
+    padding-top: 100%;
+}
+.gallery-box__image {
+	background-position: center;
+	background-repeat: no-repeat;
+    position: absolute; 
+    top: 0; left: 0;
+    width: 100%; 
+    height: 100%;
+    background-size: cover;
+ }
+
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//
+
+#box11, #box12, #box13{
+	width: 32.3333%;
+}
+#box11 .heigth, #box12 .heigth, #box13 .heigth{
+	padding-top: 66.666%;
+}
+#box21, #box22, #box23, #box24{
+	width: 24%;
+}
+#box21 .heigth, #box22 .heigth, #box23 .heigth, #box24 .heigth{
+	padding-top: 66.666%;
+}
+footer{
+	background-color: #F5F9FF;
+	text-align: center;
+	color: #000;
+	height: 100px;
+	position: relative;
+
+	span{
+		vertical-align: -30px;
+	}
+}
+//уберём касячки с футера)))
+footer:before{
+	content: "";
+	display: block;
+	position: absolute;
+	background-color: #fff;
+	width: 0.5%;
+	height: 100%;
+	left: 0px;
+}
+footer:after{
+	content: "";
+	background-color: #fff;
+	display: block;
+	position: absolute;
+	width: 0.5%;
+	height: 100%;
+	right: 0px;
+	top:0px;
+}
