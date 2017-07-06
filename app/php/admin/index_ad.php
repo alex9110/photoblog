@@ -8,14 +8,18 @@
 	//remove_photo($config['img_folder'].'photo_12.jpg', $config['tmp']);
 ?>		
 		<div style="background-color: #ccc; width: 100%; min-height: 50px">
-			<input class="upload_photo" type="file" multiple="multiple" accept=".txt,image/*">
-			<a href="#" id="upload_photo" ">Загрузить файлы</a>
-			<div class="ajax-respond"></div>
+			<input class="upload_photo" type="file" multiple="multiple" accept="image/*">
+			<div style="cursor: pointer;" id="upload_photo" ">Загрузить файлы</div>
+			<div style="cursor: pointer;" id="save_row" ">Сохранить ряд</div>	
 		</div>
 		<div class="content">
+		<?php echo ( show_normal_size_photo("temporarily") ); ?>
 		    <div class="gallery">
-		    	<?php echo ( show_normal_size_photo("temporarily") ); ?>
-				<?php echo ( show_photo("index_photo") ); ?>		
+		    	
+				<?php //echo ( show_photo_r("index_photo") );
+				$x = show_photo_r("index_photo");
+				print_r($x);
+				 ?>		
 			</div>
 		</div>
 <?php

@@ -68,14 +68,91 @@
 		}				
 	}
 	//функцыя вернет строку все фотки в виде не нумерованого списка ul, параметры имя таблицы с которой нужно взять фтки
+	
 	function show_photo($table_name){
 		$config = config();		//подтяним фаил с настройками
 		$data = get_data($table_name);
+		$path = $config['img_folder'].'example.jpg'; //путь к стандартной каотинке
 		$content = "";
-		$ul = "<ul>";
+		$ul = '<ul id="photo_wall" class="'.$table_name.'">';
 		$li = "";
 		$max = 0;
+		$content ='<ul id="photo_wall" class="'.$table_name.'"><li class="gallery-box" style="width:44%">'.
+			 		  '<div class="heigth" style="padding-top:66.666%"></div>'.
+			 	 	  '<div class="gallery-box__image" style="background-image: url('.$path.')"></div>'.
+		 		  '</li><p style="margin-top:50px;">Привет, здесь пока что нет фото, но это ненадолго)</p></ul>';
+		if (count($data) < 1) {
+			return $content;	 //если альбом пучтой вернем стандартное значение
+		}
 		for ($i=0; $i < count($data); $i++) { 		//пройдем по масиву по елементам первого уровня 
+		 	$path = $config['img_folder'].$data[$i]["name"];		
+		 	$width = $data[$i]["width"];
+		 	$height = $data[$i]["height"];  
+	 	
+		 	$li = '<li class="gallery-box" style="width:'.$width.'%">'.
+			 		  '<div class="heigth" style="padding-top:'.$height.'%"></div>'.
+			 	 	  '<div class="gallery-box__image" style="background-image: url('.$path.')"></div>'.
+		 		  '</li>';
+		 	
+		 	if ($max > 95) {
+		 		$ul .= "</ul>";
+		 		$ul .= "<ul>".$li;
+		 		$max = 0;
+		 	}else{
+		 		$ul .= $li;
+		 	} 	
+		 	$max += $width +1;		//если сумарная ширина фоток с марджинами будет блиска к 100% нужно запихнуть li в ul
+		}
+			return $ul.'</ul>';				
+	}
+
+//функцыя вернет строку все фотки в виде не нумерованого списка ul, параметры 1имя таблицы с которой нужно взять фтки
+//не обезятельные параметры, 2с какого ряда начать брать фотки 3сколько рядов взять	
+	function show_photo_r($table_name, $from=false, $how=false){
+		$config = config();		//подтяним фаил с настройками
+		$data = get_data($table_name);
+		$path = $config['img_folder'].'example.jpg'; //путь к стандартной каотинке
+		$content = ""; 
+		$ul = '<ul id="photo_wall" class="'.$table_name.'">';
+		$li = "";
+		$max = 0;
+		//зададим клас чтобы всекда знать какой именно альбом мы показываем
+		$content ='<ul id="photo_wall" class="'.$table_name.'"><li class="gallery-box" style="width:44%">'.
+			 		  '<div class="heigth" style="padding-top:66.666%"></div>'.
+			 	 	  '<div class="gallery-box__image" style="background-image: url('.$path.')"></div>'.
+		 		  '</li><p style="margin-top:50px;">Привет, в этом альбоме пока что нет фото, но это ненадоло)</p></ul>';
+		if (count($data) < 1) {
+			return $content;	 //если альбом пучтой вернем стандартное значение			
+		}
+		if (!$how || !$how) { //если один из елементов не указан
+			$to = count($data);
+			$first = 0;
+		}else{
+			/////////////////////////////////////////////////////////
+			$row = array();
+			$info = array();
+			$amount = 0;		//количество фоток в данном ряду
+		for ($i=0; $i < count($data); $i++){
+			$width = $data[$i]["width"];
+			$max += $width +1;
+			$amount +=1;		//количество фоток в данном ряду
+
+			if ($max > 95) {
+				$info['maunt'] = $amount; //количество фоток в данном ряду
+				$info['index'] = $i+1-$amount;		//общий порядковый номер первого фото в данном ряду отчет с нуля
+				$row[] = $info;
+				$max = 0;
+				$amount =0;
+			}		
+		}
+		//нужно узнать с какого по счету элемента начинаеться запрашиваемый ряд 
+		//и какой елемент последний для выдачи
+		$first = $row[$from]['index']; //номер первого фото которое нужно отдать
+		$to = $row[$from+$how-1]['index']+$row[$from+$how-1]['maunt'];	//номер елемента до которого выдаем не включительно
+		// return $last;
+////////////////////////////////////////////////////////////////
+		}	
+		for ($i=$first; $i < $to; $i++) { 		//пройдем по масиву по елементам первого уровня 
 		 	$path = $config['img_folder'].$data[$i]["name"];		
 		 	$width = $data[$i]["width"];
 		 	$height = $data[$i]["height"];  
@@ -103,7 +180,6 @@
 
 		$folder = $config['аlbum_covers'];
 		$content = '<div class="rubric_box">'.
-						'<a href="gallery.php"></a>'.
 						'<img src="'.$path.'example.jpg" class="rubric">'.
 						'<div class="designation">'.
 							'<h3>Привет</h3>'.
@@ -113,17 +189,18 @@
 		$data = get_data($table); 	//получим все днные с базы
 		//если массив пустой значит работ нет
 		if (count($data) < 1) {
-			echo $content;
-			return;
+			//echo $content;
+			return $content;
 		}
 		$content ="";
 		for ($i=0; $i < count($data); $i++) { 
 			$path = $folder.$data[$i]["title_photo"];		
 			$titles = $data[$i]["job_titles"];
 			$desc = $data[$i]["job_description"];  
+			$table = $data[$i]["table_photo"];	//таблица с фотками данного альбома
 
 			$content .= '<div class="rubric_box">'.
-							'<a href="gallery.php"></a>'.
+							'<a href="gallery.php?current='.$table.'"></a>'.
 							'<img src="'.$path.'" class="rubric">'.
 							'<div class="designation">'.
 								'<h3>'.$titles.'</h3>'.
@@ -264,14 +341,13 @@
 
 				if (!$result) {
 			 		die("database query faled.");
-			 	}
-				
+			 	}	
 			}
 			mysqli_close($connection);
 			remove_info();
-			return "true";	
+			return true;	
 		}else{
-			return "выберите и загрузите фото";
+			return "вы не загрузили ни одной фотки выберите и загрузите фото";
 		}
 	}
 //записывет инфу о фотках в таблицу БД для временного хранения 

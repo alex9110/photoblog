@@ -26,5 +26,17 @@ if( isset( $_GET['album_name'] ) ){
     }
  	echo json_encode($data);
 }
- 
+if( isset( $_GET['save_row'] ) ){
+    //прилетело имя таблицы с которой выведены текущие фотки, значит в неё мы их и сохраним
+    $table_name =   $_GET['save_row'];
+   $result = move_photo($table_name);
+   if ($result === true) {
+    //если всьо ок построим контент и отддим
+    $content = show_photo_r($table_name);
+   // $result = "успех";
+       echo ($content);
+   }else{
+    echo ($result);
+    }
+} 
  ?>

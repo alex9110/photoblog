@@ -1,19 +1,15 @@
 $(function(){
 
-	//отправка фоток аяксом
+//отправка фоток 
 	// Переменная куда будут располагаться данные файлов 
 	var files;
-	// Вешаем функцию на событие
-	// Получим данные файлов и добавим их в переменную
-	 
+	// Получим данные файлов и добавим их в переменную 
 	$('input.upload_photo').change(function(){
 	    files = this.files;
 	});
 	// Вешаем функцию ан событие click и отправляем AJAX запрос с данными файлов
 	 
 	$('#upload_photo').click(function( event ){
-	    event.stopPropagation(); // Остановка происходящего
-	    event.preventDefault();  // Полная остановка происходящего
 	    // Создадим данные формы и добавим в них данные файлов из files
 	    var data = new FormData();
 	    $.each( files, function( key, value ){
@@ -33,7 +29,7 @@ $(function(){
 	            if( typeof data.error === 'undefined' ){
 	                // если Файлы успешно загружены
 	                var photo = data.photo;
-	                $('.gallery ul.temporarily').html(photo);
+	                $('.temporarily').html(photo);
 	                $(".message").html("добавлены новые фото можите сохранить изменения или добавить еще фотки в этот ряд");
 	            }
 	            else{
@@ -54,8 +50,7 @@ $(function(){
 		console.log("clik");
 		var name = $('#album_name').val();
 		var desc = $('#album_desc').val();
-	    event.stopPropagation(); // Остановка происходящего
-	    event.preventDefault();  // Полная остановка происходящего
+	  
 	    // Создадим данные формы и добавим в них данные файлов из files
 	    var data = new FormData();
 	    $.each( files, function( key, value ){
@@ -90,5 +85,26 @@ $(function(){
 	    });
 	 
 	});
-	console.log("ad");
+	//var data = "save_row";
+	$('#save_row').click(function( event ){
+		var currentWork = $('#photo_wall').attr("class");
+		$( ".gallery" ).load( '../includes/main.php?save_row='+currentWork+'', function() {
+		  console.log( "Load was performed." );
+		   $('.temporarily').html("Ряд с фотками сохранен можите выбрать еще");
+		});
+		// $.ajax({
+		// 	  type: "POST",
+		// 	  url: "../includes/main.php?save_row",
+		// 	  data: data,
+		// 	  dataType: 'json',
+		// 	  success: function(data){
+		// 	  	console.log(data);
+		// 	  },
+		// 	  error: function(textStatus){
+		//             console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+		//       }
+		// });
+	});
+
+	console.log("ds");
 });
