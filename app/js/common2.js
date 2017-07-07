@@ -46,7 +46,7 @@ $(function(){
 	$('#album_cover').change(function(){
 	    files = this.files;
 	});
-	$('#save').click(function( event ){
+	$('#save_album').click(function( event ){
 		console.log("clik");
 		var name = $('#album_name').val();
 		var desc = $('#album_desc').val();
@@ -69,9 +69,9 @@ $(function(){
 	            // Если все ОК
 	            if( typeof data.error === 'undefined' ){
 	                // если Файлы успешно загружены
-	                var album = data.album;
+	                var album = data.status;
 	                 console.log(album);
-	                 $('#answer').append(album);
+	                // $('#answer').append(album);
 	                location.reload();
 	                
 	            }
@@ -85,25 +85,57 @@ $(function(){
 	    });
 	 
 	});
-	//var data = "save_row";
+	//отправка данных для нового предложения в услуги и цены
+		$('#offer_image').change(function(){
+		    files = this.files;
+		});
+		$('#save_offer').click(function( event ){
+			var offer_name = $('#offer_name').val();
+			var cost = $('#cost').val();
+			var desc = $('#offer_desc').val();
+		    // Создадим данные формы и добавим в них данные файлов из files
+		    var data = new FormData();
+		    $.each( files, function( key, value ){
+		        data.append( key, value );
+		    });
+		    // console.log(offer_name);
+		    // Отправляем запрос
+			    $.ajax({
+		        url: '../includes/main.php?offer_name='+offer_name+'&cost='+cost+'&desc='+desc+'',
+		        type: 'POST',
+		        data: data,
+		        cache: false,
+		        dataType: 'json',
+		        processData: false, // Не обрабатываем файлы (Don't process the files)
+		        contentType: false, // Так jQuery скажет серверу что это строковой запрос
+		        success: function( data, textStatus, jqXHR ){
+		            // Если все ОК
+		            if( typeof data.error === 'undefined' ){
+		                // если Файлы успешно загружены
+		              	var status = data.status;
+		              	 console.log(status);
+		              	 //$('#answer').append(status);
+		              	location.reload();
+		                
+		                
+		            }
+		            else{
+		                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+		            }
+		        },
+		        error: function( jqXHR, textStatus, errorThrown ){
+		            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+		        }
+		    });
+		 
+		});
+
 	$('#save_row').click(function( event ){
 		var currentWork = $('#photo_wall').attr("class");
 		$( ".gallery" ).load( '../includes/main.php?save_row='+currentWork+'', function() {
 		  console.log( "Load was performed." );
 		   $('.temporarily').html("Ряд с фотками сохранен можите выбрать еще");
 		});
-		// $.ajax({
-		// 	  type: "POST",
-		// 	  url: "../includes/main.php?save_row",
-		// 	  data: data,
-		// 	  dataType: 'json',
-		// 	  success: function(data){
-		// 	  	console.log(data);
-		// 	  },
-		// 	  error: function(textStatus){
-		//             console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-		//       }
-		// });
 	});
 
 	console.log("ds");

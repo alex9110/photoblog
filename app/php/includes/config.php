@@ -9,8 +9,11 @@
 			'index'=>'index_photo',			//имя таблицы для фоток индексной страницы
 			'tmp'=>'temporarily',			//имя таблицы для временного хранения
 			'portfolio'=>'portfolio',		//имя таблицы с данными обо всех альбомах
-			'img_folder'=>"../../albums/photo/",				//папка с фотками
-			'аlbum_covers'=>'../../albums/covers/'		//папка для хранения обложок альбовом
+			'price'=>'price',				//имя таблицы для странички услуги и цены
+			'extra_service'=>'extra_service',  //имя таблицы дополнительные услуги
+			'img_folder'=>"../../all_photos/photo/",				//папка с фотками
+			'аlbum_covers'=>'../../all_photos/covers/',		//папка для хранения обложок альбовом
+			'price_image'=>"../../all_photos/price/"		//папка для хранения фоток услуг и цен
 		);
 		return($data);
 	}

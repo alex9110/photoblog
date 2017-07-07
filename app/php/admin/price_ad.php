@@ -1,55 +1,50 @@
-<?php require_once("header_ad.php"); ?>
+<?php 
+	require_once("header_ad.php"); 
+	require_once("../includes/functions.php"); 
+	require_once("../includes/config.php"); 
+
+?>
 	<link rel="stylesheet" href="../../css/price.css">
+	<link rel="stylesheet" href="../../css/form2.css">
+	<form id="save_form">
+		<div id="desc">
+			<div id="fileName"><p>Выбери изображения </p></div>
+			<div id="fileUpload">
+				<label><input class="none" name="takeImg" type="file" accept="image/*" id="offer_image" onchange="getFileName ();" ><span>Выбрать</span></label>
+			</div>
+			<input placeholder="Названия услуги" maxlength="50" type="text" class="input" id="offer_name"/> 
+			<input placeholder="стоимость" maxlength="30" type="text" class="input" id="cost"/> 
+			<div></div> 
+			<textarea cols="70" rows="7" placeholder="Описания услуги. ВНИМАНИЕ дла обозначения нового элемента списка раздиляйте написанный вами текст знаком слеш / " maxlength="700" class="input text" id="offer_desc"></textarea>	
+		</div>	
+		<input type="button" name="submit" value="сохранить" id="save_offer" class="save button" />
+		<div id="preview"></div>
+		<script>// скрипт для формы сохранения закладок
+			function getFileName () { //покажем имя выбраного файла
+				var file = document.getElementById ('offer_image').value;
+				 document.getElementById('fileName').innerHTML ='файл: '+file;
+			}
+			function handleFileSelect(evt) {                 //запускаем функцию обработки события в нее передается объект события
+   				var files = evt.target.files;                // возьмемем наш фаил точнее масив 
+    			var file = files[0];
+    			var reader = new FileReader();               //создадим экземпляр объекта FileReader()
+    			reader.readAsDataURL(file);                  //читаем фаил с с помощю данного метода
+    			reader.onload = (function(event) {           //когда читаемтение файла завершено вызываем функцию для отображения картинки и передаем в нее обьект этого событие
+        			var image = event.target.result;
+        			var prew = document.getElementById('preview');
+        			prew.style.backgroundImage = "url("+image+")";
+				});
+				}
+				// вешаем обработчик на елемент с id files
+				document.getElementById('offer_image').addEventListener('change', handleFileSelect, false);
+		</script>
+	</form>
 	<div class="content">
 		<div class="service_box">
-			<div class="service offers1">
-				<p class="service_name">СВАДЕБНАЯ ФОТОСЪЕМКА</p>
-					<img src="../img/photo3_2.jpg" class="photo">
-					<div class="desc">
-						<p class="cost">"СТОИМОСТЬ" <br><span>12 000 ₽</span></p>
-						<ul>
-							<li>- Заключение договора и консультация с фотографом;</li>
-							<li>- Съемка не менее 3 часов;<br>( ЗАГС и прогулка)</li>
-							<li>- Обработка всех фотографий(цветокоррекция, кадрирование,контрастность), не менее 250 фотографий;</li>
-							<li>-  Художественная ретушь 20 фотографий (пластика, ретушь лица, авторская тонировка фотографий) ;</li>
-							<li>- Срок исполнения до 2 месяцев;</li>
-							<li>- Хранение отснятого материала в течении 1 года;</li>
-							<li>Точную стоимость услуг вы можете узнать по телефону</li>
-
-						</ul>
-					</div>
-				<span class="tel">8-929-649-19-88</span>
-			</div>
-				<div class="service offers2">
-					<p class="service_name">ФОТОСЕССИЯ, ПОРТРЕТНАЯ СЪЕМКА</p>
-					<img src="../img/photo3_3.jpg" class="photo">
-						<div class="desc">
-							<p class="cost">"СТОИМОСТЬ" <br><span>12 000 ₽</span></p>
-							<ul>
-								<li>- консультация в выборе локации или студии;</li>
-								<li>- помощь в подборе образа для фотосессии;</li>
-								<li>- до 2-х часов съемки;</li>
-								<li>- 15 фотографий в авторской ретуши;</li>
-								<li>- Срок исполнения до 2 месяцев;</li>
-								<li>- лучшие фотографии в цветокоррекции;</li>
-								<li>- срок выполнения 2-3 недели;</li>
-								<li>Точную стоимость услуг вы можете узнать по телефону</li>
-								
-							</ul>
-						</div>
-					<span class="tel">8-929-649-19-88</span>
-				</div>
+			<?php 
+				echo(show_prices());
+			 ?>	
 		</div>
-		<div class="extra_service">
-			<h2>Дополнительные услуги:</h2>
-			<ul>
-				<li>- Фотокнига из искусственной кожи в фотобоксе размер 20х20 от 8.000 тысяч рублей;</li>
-				<li>- Фотокнига премиум класса в кожаном переплете  30х30 от 12.000 тысяч рублей;</li>
-				<li>-Авторская, художественная ретушь 1 фото - 250 рублей;</li>
-				<li>- Передача всех исходных файлов в формате jpg 2.000 тысячи рублей;</li>
-				<li>- Печать фотохолста от 3.000 тысячи рублей;</li>
-			</ul>
-		</div>
-
+		<?php echo(show_extra_service());?>
 	</div>
 <?php require_once("footer_ad.php"); ?>

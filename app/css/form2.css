@@ -8,7 +8,7 @@
 li {
   list-style-type: none; }
 
-#bkSaveForm {
+#save_form {
   position: relative;
   border: 1px solid #ccc;
   background-color: #F1F1F1;
@@ -19,6 +19,16 @@ li {
   -webkit-box-shadow: 0 0 3px #4888EF;
           box-shadow: 0 0 3px #4888EF;
   overflow: hidden; }
+
+input {
+  border: 1px solid #D4D4D4;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  height: 20px;
+  width: 300px;
+  overflow: hidden;
+  margin: 10px 0 5px 5px;
+  padding: 0 5px 0 5px; }
 
 #desc {
   display: inline-block; }
@@ -54,7 +64,7 @@ li {
   text-align: center;
   line-height: 20px; }
 
-#album_cover {
+.none {
   display: none; }
 
 #fileUpload {
@@ -86,9 +96,9 @@ li {
   -webkit-border-radius: 4px;
           border-radius: 4px;
   height: 20px;
-  width: 220px;
+  width: 300px;
   overflow: hidden;
-  margin: 10px 0 5px 0;
+  margin: 10px 0 5px 5px;
   padding: 0 5px 0 5px; }
 
 #album_desc {
@@ -101,6 +111,12 @@ li {
   margin: 10px 0 5px 0;
   padding: 0 5px 0 5px; }
 
+.text {
+  margin: 5px; }
+
+#cost {
+  width: 200px; }
+
 #preview {
   border: 1px solid #ccc;
   width: 30%;
@@ -111,18 +127,19 @@ li {
   right: 5px;
   color: #535353;
   font-size: 15px;
-  -webkit-background-size: 100% 100%;
-          background-size: 100%;
+  -webkit-background-size: contain;
+          background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden; }
 
-#save {
+.save {
   border: none;
   background-color: #4888EF;
   z-index: 2;
   position: absolute;
-  bottom: 5px;
+  width: 270px;
+  bottom: 0px;
   right: 5px;
   cursor: pointer;
   -webkit-border-radius: 4px;

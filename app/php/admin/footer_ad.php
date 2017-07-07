@@ -4,6 +4,6 @@
 	</div>
 
 	<script src="../../js/libs.min.js"></script>
-	<script src="../../js/common1.js"></script>
+	<script src="../../js/common2.js"></script>
 </body>
 </html>

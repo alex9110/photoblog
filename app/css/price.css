@@ -9,6 +9,7 @@
   overflow: hidden;
   position: relative; }
   .service .service_name {
+    text-transform: uppercase;
     background-color: #fff;
     display: block;
     text-align: center;

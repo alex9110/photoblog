@@ -6,17 +6,17 @@
 	<link rel="stylesheet" href="../../css/portfolio.css">
 	<link rel="stylesheet" href="../../css/form2.css">
 	<div class="content">
-		<form id="bkSaveForm">
+		<form id="save_form">
 			<div id="desc">
 				<div id="fileName"><p>выберите фото обложку альбома </p></div>
 				<div id="fileUpload">
-					<label><input name="takeImg" type="file" accept="image/*" id="album_cover" onchange="getFileName ();" ><span>Выбрать</span></label>
+					<label><input class="none" name="takeImg" type="file" accept="image/*" id="album_cover" onchange="getFileName ();" ><span>Выбрать</span></label>
 				</div>
 				<input placeholder="названия альбома" maxlength="50" type="text" class="input" id="album_name"/> 
 				<div></div>
 				<input placeholder="краткое описание альбома" maxlength="100" type="text" class="input" id="album_desc"/> 
 			</div>	
-			<input type="button" name="submit" value="сохранить" id="save" class="button" />
+			<input type="button" name="submit" value="сохранить" id="save_album" class="save button" />
 			<div id="preview"></div>
 			<script>// скрипт для формы сохранения закладок
 				function getFileName () { //покажем имя выбраного файла

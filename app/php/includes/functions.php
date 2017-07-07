@@ -1,6 +1,17 @@
 <?php 
 	require_once("config.php");   //подключим настройки
-//получим масив с настройками
+//из строки создает список li елементов регулируеться /
+		function build_list($text){
+			$li = '';
+				if ($text !="") {
+					$arr = array();                               		 // создам массив он мне нужен 
+			        $arr = explode("/", $text);               		 //дробим имя на масив регулируемся 
+				}
+				for ($i=0; $i < count($arr); $i++) { 
+					$li .= '<li>'.$arr[$i].'</li>';
+				}
+				return($li);
+		}
 //функцыя для подлючения к базе данных если все ок возвращает переменную с текущим подлючением
 	function connect_db(){
 		$config = config();			//получим настройки для подлючения к базе
@@ -173,6 +184,8 @@
 		}
 			return $ul.'</ul>';				
 	}
+
+	//показать альбомы
 	function show_woks(){
 		$config = config();
 		$table = $config['portfolio'];
@@ -210,7 +223,53 @@
 		}
 		return $content;
 	}
-	//соранения фото 
+	function show_prices(){
+		$config = config();
+		$table_name = $config['price'];
+		$data = get_data($table_name);
+		$image_folder =  $config['price_image'];
+
+		$service_name = "";
+		$image_name = "";
+		$li = "";
+		$content = "";
+		
+		//echo($d);
+		for ($i=0; $i < count($data); $i++) { 
+			$service_name = $data[$i]['service_name'];
+			$cost = $data[$i]['cost'];
+			$image_name = $data[$i]['image_name'];
+			$li = build_list($data[$i]['description']);		
+			$content .= '<div class="service">'.
+							'<p class="service_name">'.$service_name.'</p>'.
+							'<img src="'.$image_folder.$image_name.'" class="photo">'.
+								'<div class="desc">'.
+									'<p class="cost">"СТОИМОСТЬ" <br><span>'.$cost.'</span></p>'.
+									'<ul>'.$li.'</ul>'.
+								'</div>'.
+							'<span class="tel">8-929-649-19-88</span>'.
+						'</div>';
+		}
+		return $content;
+	}
+// выведет все с таблицы дополнительных услуг
+	function show_extra_service(){
+		$config = config();
+		$table_name = $config['extra_service'];
+		$data = get_data($table_name);
+		$content = "";
+		for ($i=0; $i < count($data); $i++) { 
+			$service_name = $data[$i]['service_name'];
+			$li = build_list($data[$i]['description']);	
+		
+		 $content .= '<div class="extra_service">'.
+						'<h2>'.$service_name.'</h2>'.
+						'<ul>'.$li.'</ul>'.
+					'</div>';
+		}
+		echo $content;
+	}
+	//соранения фото для галерей с записю во временную таблицу
 	function save_photo(){
 		$config = config();		//подтяним фаил с настройками
 		$data = array(); //для ответа
@@ -234,41 +293,39 @@
 		            $error = true;
 		        }
 		    }
-		    // $properties = set_size($new_photo); 
 		    $content = show_normal_size_photo( $config['tmp'] );
 		    $data = $error ? array('error' => 'Ошибка загрузки файлов.') : array('photo' => $content);
 
 		    return $data;
 	}
-	 //создания и соранения альбома 
-	function save_title_photo(){
+	//обычное сохранения фото принимает папку в которую нужно сохранить
+	function save_title_photo($uploaddir=false){
+		
+		if (!$uploaddir) {		//если забыли указать папку выходим из 
+			return;
+		}
 		$config = config();		//подтяним фаил с настройками
 		$data = array();		 //для ответа
-		//$new_photo = array();   //масив для хранения имен и инфы о новых файлах
 
 		    $error = false;
-		    $uploaddir = $config['аlbum_covers']; 
+		    
 		    // Создадим папку если её нет
 		    if( ! is_dir( $uploaddir ) ) mkdir( $uploaddir, 0777 );
-		 
+		 	$file = 0;
 		    // переместим файлы из временной директории в указанную
 		    foreach( $_FILES as $file ){
+		    	$count ++;
 		    	 $new_name = rename_photo($file['name']);		//получим новое имя для фото
 		        if( move_uploaded_file( $file['tmp_name'], $uploaddir . $new_name ) ){
-		        	 // если фотка сохранилась сохраним данные в таблицу для портфолио и создадим таблицу в БД для нового альбома
-
-		        	
-		           // если фотка сохранилась запишем пут к ней
-		           // $new_photo[] = $uploaddir.$new_name;
 		        }
 		        else{
 		            $error = true;
 		        }     
 		    }
-		  $data = $error ? array('error' => 'Ошибка загрузки файлов.') : array('album' => "альбом создан", 'photo_name'=>$new_name);
+		  $data = $error ? array('error' => 'Ошибка загрузки файлов.') : array('status' => "фото сохранено", 'photo_name'=>$new_name);
 		    return $data;
 	}
-
+ //создания и соранения альбома 
 	function сreate_album($photo, $title, $desc){
 		$config = config();
 		$table = $config['portfolio'];
@@ -302,6 +359,23 @@
 		//  // шаг 4. отпустьть возвращенные данные			
 		  //5закрыть соединение
 		mysqli_close($connection);
+		return true;
+	}
+	function create_offer($photo_name, $offer_name, $cost, $desc){
+		   $config = config();
+		   $table = $config['price'];
+		   $path = $config['price_image'];
+		   $connection = connect_db(); //подключится к базе
+		   $query = "INSERT INTO {$table} (id, service_name, image_name, cost, description) VALUES (NULL, '$offer_name', '$photo_name', '$cost', '$desc')"; 
+		   $result  = mysqli_query($connection, $query);
+		   //проверяем нет ли ошибок запроса
+		   if (!$result) {
+		     die("database query faled.");
+		     return false;
+		   }
+		  
+		   mysqli_close($connection);
+
 		return true;
 	}
 	//переместить записи о фотках из временной таблицы в нужную
