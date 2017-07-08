@@ -257,7 +257,19 @@
 		$config = config();
 		$table_name = $config['extra_service'];
 		$data = get_data($table_name);
-		$content = "";
+		$content = '<div class="extra_service">'.
+						'<h2>Дополнительные услуги</h2>'.
+						'<ul>'.
+							'<li>-Фотокнига из искусственной кожи в фотобоксе размер 20х20 от 8.000 тысяч рублей;</li>'.
+							'<li>- Фотокнига премиум класса в кожаном переплете 30х30 от 12.000 тысяч рублей;</li>'.
+							'<li>-Авторская, художественная ретушь 1 фото - 250 рублей;</li>'.
+							'<li>- Передача всех исходных файлов в формате jpg 2.000 тысячи рублей;</li>'.
+							'<li>- Печать фотохолста от 3.000 тысячи рублей;</li>'.
+						'</ul>'.
+					'</div>';
+		if (count($data)>0) {
+			$content = "";
+		}
 		for ($i=0; $i < count($data); $i++) { 
 			$service_name = $data[$i]['service_name'];
 			$li = build_list($data[$i]['description']);	
@@ -268,6 +280,21 @@
 					'</div>';
 		}
 		echo $content;
+	}
+	//сформирует контент для страницы профаил
+	function show_profile(){
+		$content = '<img src="../../all_photos/avatar/avatar.jpg" class="avatar">'.
+				'<p class="desk" ><span>Lorem ipsum</span> <br>sit amet, consectetur adipisicing elit. Odit cum eos ex, nihil explicabo maiores totam officia repellendus tenetur magni officiis maxime eum est debitis quos commodi quis aut itaque sed aspernatur, incidunt saepe. Aperiam ea rerum, nihil quae soluta nemo. Hic eaque eligendi, expedita aliquam, reiciendis minima, reprehenderit, illo molestiae dolore explicabo eum numquam? Cum laborum quasi id soluta perspiciatis adipisci, ipsam tenetur cumque incidunt iusto culpa, illum aspernatur similique beatae repudiandae modi quos explicabo laboriosam, tempore nesciunt deleniti eos consequuntur ex placeat. Dignissimos excepturi animi voluptas doloremque eum natus debitis porro beatae, earum nobis, molestiae nemo suscipit. Repellendus?</p>';
+
+		$config = config();
+		$table = $config['profile'];
+		$data = get_data($table);
+		if (count($data) > 0) {
+			$content = '<img src="'.$config['avatar'].$data[0]['photo_name'].'" class="avatar">'.
+						'<p class="desk" ><span>'.$data[0]['article_title'].'</span><br>'.$data[0]['article_text'].'</p>';
+		}
+
+		 return $content;
 	}
 	//соранения фото для галерей с записю во временную таблицу
 	function save_photo(){
@@ -466,6 +493,28 @@
 		}
 
 		return $new_name;
+	}
+//изменить доп услуги
+	function change_extra_services($text){
+	  $config = config();
+	  $table_name = $config['extra_service'];
+	  $connection = connect_db();
+	  $arr = get_data($table_name);	
+	  //если записи есть
+	  if ( count($arr) > 0 ) {
+	  	$query = "UPDATE {$table_name} SET service_name = 'Дополнительные услуги', description = '$text'";
+	  }else{
+      $query = "INSERT INTO {$table_name} (id, service_name, description) VALUES (NULL, 'Дополнительные услуги', '$text')"; 
+      }
+	   
+	  $result  = mysqli_query($connection, $query);
+	  //проверяем нет ли ошибок запроса
+	  if (!$result) {
+	    die("database query faled.");
+	  }
+	   //5закрыть соединение
+	  mysqli_close($connection);
+	  return true;
 	}
 	//удалит все записи во временной таблице
 	function remove_info(){

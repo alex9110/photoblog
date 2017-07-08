@@ -11,7 +11,7 @@
 	<div class="wrapper">
 		<header>
 			<div class="header_box">
-				<div class="logo"><a href="../admin/index_ad.php"><h2>Helena Nazarenko</h2></a></div>
+				<div class="logo"><a href="../admin/admin.php"><h2>Helena Nazarenko</h2></a></div>
 				<nav>
 					<ul>
 						<li><a href="index.php">Главная</a></li>

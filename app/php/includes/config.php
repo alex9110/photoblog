@@ -11,9 +11,12 @@
 			'portfolio'=>'portfolio',		//имя таблицы с данными обо всех альбомах
 			'price'=>'price',				//имя таблицы для странички услуги и цены
 			'extra_service'=>'extra_service',  //имя таблицы дополнительные услуги
-			'img_folder'=>"../../all_photos/photo/",				//папка с фотками
+			'profile'=>'profile',				//имя таблицы странички профаил
+			'contacts'=>'contacts',				//имя таблицы с контактными данными
+			'img_folder'=>'../../all_photos/photo/',				//папка с фотками
 			'аlbum_covers'=>'../../all_photos/covers/',		//папка для хранения обложок альбовом
-			'price_image'=>"../../all_photos/price/"		//папка для хранения фоток услуг и цен
+			'price_image'=>'../../all_photos/price/',		//папка для хранения фоток услуг и цен
+			'avatar'=>'../../all_photos/avatar/'			//папка для хранения авы
 		);
 		return($data);
 	}

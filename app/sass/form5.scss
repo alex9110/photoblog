@@ -1,0 +1,18 @@
+#avatar{
+	border: 1px solid #D4D4D4;
+	margin: 5px 5px; 
+	padding: 0 10px;
+	float: left;
+	height: 20px;
+	width:300px;
+	 overflow: auto;
+	position: relative;
+	font-size: 12px;
+	border-radius: 4px;
+	background-color: #fff; 
+}
+#avatar p{
+	color: #828282;
+	text-align: center;
+	line-height: 20px;
+}

@@ -1,0 +1,25 @@
+.content{
+	text-align: center;
+}
+.contacts{
+	text-transform: uppercase;
+	font-weight: bold;
+	//border-bottom: 1px solid #ccc;
+	text-align: center;
+	display: inline-block;
+	width: 25%;
+	margin: 10px;
+	input{
+		width: 100%;
+		padding: 4px;
+		margin: 5px 0;
+		// margin: 5px;
+		// margin-left: 0;
+		border: 2px solid #4888EF;
+		border-radius: 4px;
+	}
+	
+}
+.contacts:nth-child(n+10){
+		color: red;
+}

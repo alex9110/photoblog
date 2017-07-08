@@ -1,6 +1,6 @@
  <?php 
  require_once("functions.php");
-  require_once("config.php");
+require_once("config.php");
 
 
  //если гетом пришли данные с ключом uploadfiles сохранить эти фотки
@@ -31,6 +31,7 @@ if( isset( $_GET['album_name'] ) ){
     }
  	echo json_encode($data);
 }
+//сохранить ряд с фотками
 if( isset( $_GET['save_row'] ) ){
     //прилетело имя таблицы с которой выведены текущие фотки, значит в неё мы их и сохраним
     $table_name =   $_GET['save_row'];
@@ -44,7 +45,7 @@ if( isset( $_GET['save_row'] ) ){
     echo ($result);
     }
 } 
-//проблемы вроди как спутями
+//сохранение новой услуги
 if( isset( $_GET['offer_name'] ) ){
    $config = config();
    $data = array();
@@ -64,6 +65,59 @@ if( isset( $_GET['offer_name'] ) ){
     }
       echo json_encode($data);
 } 
+//изменения дополнительных услуг
+if( isset($_GET['extra_service']) ){
+    $data = array();
+    $text = $_POST['data'];
+    if (change_extra_services($text) == true) {
+      $data['status'] = true;
+    }else{
+      $data['error'] = true;
+    }
+    echo json_encode($data);
+}
 
+//изменить инфу в профаил
+if( isset( $_GET['profile'] ) ){
+    $config = config();
+    $data = array();
+    $data['status'] = "Виберите фото";
+    $title = $_GET['title'];
+    $article = $_GET['article'];
+    $uploaddir = $config['avatar']; 
+    if ( count($_FILES) > 0) {
+      $data = save_title_photo($uploaddir);
+      //если ошибок нет
+      if (!$data['error']) {
+        $result = change_profile($data['photo_name'], $title, $article);
+        //если создание не удалось запишим ошибку
+        if ($result == false) {
+          $data['error'] = 'не удалось создать альбом'; 
+        }
+      }
+    }
+  echo json_encode($data);
+}
+function change_profile($photo_name, $title, $article){
+    $config = config();
+    $table_name = $config['profile'];
+    $arr = get_data($table_name);
+    $connection = connect_db();
+   // проверим не наличия записи в нашей таблице 
+    if ( count($arr) > 0 ) {
+      $query = "UPDATE {$table_name} SET photo_name = '$photo_name', article_title = '$title', article_text = '$article'"; 
+    }else{
+      $query = "INSERT INTO {$table_name} (id, photo_name, article_title, article_text) VALUES (NULL, '$photo_name', '$title', '$article')"; 
+    }
+   
+    $result  = mysqli_query($connection, $query);
+    //проверяем нет ли ошибок запроса
+    if (!$result) {
+      die("database query faled.");
+    }
+     //5закрыть соединение
+    mysqli_close($connection);
+    return true;
+  }
 
  ?>

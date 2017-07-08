@@ -1,0 +1,10 @@
+#extra_service {
+  background-color: #F1F1F1; }
+
+#service_desc {
+  margin: 5px; }
+
+#service_but {
+  width: auto;
+  cursor: pointer;
+  background-color: #4888EF; }

@@ -6,6 +6,7 @@
 ?>
 	<link rel="stylesheet" href="../../css/price.css">
 	<link rel="stylesheet" href="../../css/form2.css">
+	<link rel="stylesheet" href="../../css/form4.css">
 	<form id="save_form">
 		<div id="desc">
 			<div id="fileName"><p>Выбери изображения </p></div>
@@ -45,6 +46,10 @@
 				echo(show_prices());
 			 ?>	
 		</div>
+		<form id="extra_service">
+			<textarea id="service_desc"  cols="70" rows="7" type="text" placeholder="Укажите список дополнительных услуг, каждый елемент списка необходимо разделять значком слеш /"></textarea>
+			<input id="service_but" type="button" value="изменить">
+		</form>
 		<?php echo(show_extra_service());?>
 	</div>
 <?php require_once("footer_ad.php"); ?>
