@@ -4,6 +4,7 @@
 .contacts {
   text-transform: uppercase;
   font-weight: bold;
+  color: #5F5F5F;
   text-align: center;
   display: inline-block;
   width: 25%;
@@ -18,3 +19,14 @@
 
 .contacts:nth-child(n+10) {
   color: red; }
+
+.but {
+  -webkit-border-radius: 8px;
+          border-radius: 8px;
+  padding: 4px;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #4888EF;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 20px; }
