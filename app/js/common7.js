@@ -203,5 +203,45 @@ $(function(){
 		 
 		});
 
+		$(".but").click(function(evt){
+		var value = $(".cont_input");
+		var val;
+		var name;
+		var data = {};
+		for (var i = 0; i < value.length; i++) {
+			 name = $(value[i]).attr('name');
+			 val = $(value[i]).val();
+			 val = $.trim(val);
+
+			 data[name] = val;
+
+			
+		}
+		    $.ajax({
+		        url: '../includes/main.php?contacts_change',
+		        type: 'POST',
+		        data: data,
+		       	dataType: 'json',
+		        success: function( data, textStatus, jqXHR ){
+		            // Если все ОК
+		            if( typeof data.error === 'undefined' ){
+		                // если Файлы успешно загружены
+		              	var status = data.status;
+		              	 console.log(status);
+		              	 console.log(data);
+		              	 alert('Данные сохранены');
+		              	 location.reload();	
+		            }
+		            else{
+		                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+		            }
+		        },
+		        error: function( jqXHR, textStatus, errorThrown ){
+		            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+		        }
+		    });	
+	});
+		
+
 	console.log("ds");
 });

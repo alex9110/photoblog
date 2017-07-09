@@ -39,11 +39,6 @@
 			</script>
 		</form>
 	
-		<?php  echo( show_woks() );
-		//сreate_album();
-		?>
-
-		
-
+		<?php  echo( show_woks() );?>
 	</div>
 <?php require_once("footer_ad.php"); ?>

@@ -3,26 +3,12 @@
 require_once("config.php");
 //смена контактов
 if( isset($_GET['contacts_change']) ) {
-  $arr = $_POST;
+ 
   $data = array();
   $data['status'] = "ok";
-  //$data['status'] = $arr;
-
-  reset($arr);
-  $i =1;
-  $connection = connect_db(); //подключится к базе
-  while (list($key, $val) = each($arr)) {
-    $query = "UPDATE contacts SET name = '$key', value = '$val' WHERE id = '$i'";
-    $result  = mysqli_query($connection, $query);
-    $i++; 
-    //проверяем нет ли ошибок запроса
-    if (!$result) {
-      die("database query faled.");
-    }     
-  }
-  //5закрыть соединение
-  mysqli_close($connection);
-  echo json_encode($data);
+  if ( set_contacts() ) {
+     echo json_encode($data);
+   } 
 }
 
  //если гетом пришли данные с ключом uploadfiles сохранить эти фотки

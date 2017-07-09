@@ -44,6 +44,24 @@
 		mysqli_close($connection);
 		return $data;
 	}
+	// получть контакты, в качестве парам названия категории контактов
+	//вернет только те в который есть значения value
+	function get_contacts($category){
+		$config = config();
+		$table = $config['contacts'];
+		$data = get_data($table);
+		$arr = array();
+		$info = array();
+		for ($i=0; $i < count($data); $i++) { 
+			// $name = $data[$i]['name'];
+			if ($data[$i]['value'] != "" && $data[$i]['category']==$category) {
+				 $info['name'] = $data[$i]['name'];
+				 $info['value'] = $data[$i]['value'];
+				 $arr[] = $info;
+			}	
+		}
+		return $arr;
+	}
 
 	//функцыя вернет строку все фотки в виде не нумерованого списка ul, параметры имя таблицы с которой нужно взять фтки
 	// но в данном случае фото будут необхдимого размера даже если он не указан б базе
@@ -116,6 +134,18 @@
 		}
 			return $ul.'</ul>';				
 	}
+		function show_all_contacts(){
+				$config = config();
+				$table = $config['contacts'];
+				$data = get_data($table);
+				$li = '';
+				for ($i=0; $i < count($data); $i++) { 
+					$name = $data[$i]['name'];
+					$value = $data[$i]['value'];
+					$li .= '<li class="contacts"><p>'.$name.'</p><input name="'.$name.'" type="text" value="'.$value.'" class="cont_input"></li>';
+				}
+				return $li;
+		}
 
 //функцыя вернет строку все фотки в виде не нумерованого списка ul, параметры 1имя таблицы с которой нужно взять фтки
 //не обезятельные параметры, 2с какого ряда начать брать фотки 3сколько рядов взять	
@@ -233,8 +263,13 @@
 		$image_name = "";
 		$li = "";
 		$content = "";
-		
-		//echo($d);
+		$contact_content = "";
+		$phones= get_contacts('phone');
+		//получим наши номера телефонов
+		for ($i=0; $i < count($phones) ; $i++) { 
+			$value = $phones[$i]['value'];
+			$contact_content .= '<div class="tel">'.$value.'<i class="icon-phone"></i></div>';
+		}
 		for ($i=0; $i < count($data); $i++) { 
 			$service_name = $data[$i]['service_name'];
 			$cost = $data[$i]['cost'];
@@ -247,7 +282,7 @@
 									'<p class="cost">"СТОИМОСТЬ" <br><span>'.$cost.'</span></p>'.
 									'<ul>'.$li.'</ul>'.
 								'</div>'.
-							'<span class="tel">8-929-649-19-88</span>'.
+							'<div class="phones">'.$contact_content.'</div>'.
 						'</div>';
 		}
 		return $content;
@@ -295,6 +330,27 @@
 		}
 
 		 return $content;
+	}
+//функцыя для изменения контактов
+	function set_contacts(){
+	  $arr = $_POST;
+	  $config = config();
+	  $table = $config['contacts'];
+	  reset($arr);
+	  $i =1;
+	  $connection = connect_db(); //подключится к базе
+	  while (list($key, $val) = each($arr)) {
+	    $query = "UPDATE {$table} SET name = '$key', value = '$val' WHERE id = '$i'";
+	    $result  = mysqli_query($connection, $query);
+	    $i++; 
+	    //проверяем нет ли ошибок запроса
+	    if (!$result) {
+	      die("database query faled.");
+	    }     
+	  }
+	  return true;
+	  //5закрыть соединение
+	  mysqli_close($connection);
 	}
 	//соранения фото для галерей с записю во временную таблицу
 	function save_photo(){

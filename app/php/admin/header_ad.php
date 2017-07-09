@@ -1,8 +1,12 @@
+<?php 
+	require_once("../includes/functions.php"); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<link rel="stylesheet" href="../../libs/icons/fontello/css/flickr.css">
 	<link rel="stylesheet" href="../../css/main.css">
 	<link rel="stylesheet" href="../../css/admin.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,10 +27,15 @@
 					</ul>
 				</nav>
 				<div class="social">
-					<ul>
-						<li class="vk"><a href="https://vk.com" target="_blank"></a></li>
-						<li class="facebook"><a href="https://facebook.com" target="_blank"></a></li>
-						<li class="instagram"><a href="https://www.instagram.com/" target="_blank"></a></li>
+					<ul>						
+						<?php 
+							$data = get_contacts('social');
+							for ($i=0; $i < count($data) ; $i++) { 
+								$name = $data[$i]['name'];
+								$url = $data[$i]['value'];
+								echo '<li class="instagram"><a href="'.$url.'" target="_blank" ><i class="icon-'.$name.'"></i></a></li>';
+							}
+						 ?>
 					</ul>
 				</div>
 			</div>

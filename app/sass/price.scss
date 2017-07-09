@@ -41,10 +41,13 @@
 		width: auto;
 		margin: 0px 40px 0px 0;
 	}
-	.tel{
+	.phones{
+		display: inline-block;
 		position: absolute;
 		bottom: 0;
 		right: 0;
+	}
+	.tel{
 		padding: 10px;
 		color: #EA4AE1;
 		font-weight: bold;

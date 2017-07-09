@@ -1,7 +1,6 @@
 <?php 
 	require_once("../includes/functions.php");
 	require_once("header.php"); 		//подключим header
-	// require_once("admin_p.php");
 ?>		
 		<div class="content">
 		    <div class="gallery">
