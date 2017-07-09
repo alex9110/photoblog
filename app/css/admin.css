@@ -30,3 +30,26 @@
   text-align: center;
   cursor: pointer;
   margin-bottom: 20px; }
+
+.gallery ul {
+  position: relative; }
+  .gallery ul span {
+    display: inline-block;
+    -webkit-border-radius: 4px;
+            border-radius: 4px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    z-index: 100;
+    color: red;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    -webkit-transition: 200;
+    -o-transition: 200;
+    transition: 200; }
+  .gallery ul span:hover {
+    background-color: #580000; }
+  .gallery ul span::before {
+    content: "x"; }

@@ -202,45 +202,57 @@ $(function(){
 		    });
 		 
 		});
+//смена информацыи контакты
+	$(".but").click(function(evt){
+	var value = $(".cont_input");
+	var val;
+	var name;
+	var data = {};
+	for (var i = 0; i < value.length; i++) {
+		 name = $(value[i]).attr('name');
+		 val = $(value[i]).val();
+		 val = $.trim(val);
 
-		$(".but").click(function(evt){
-		var value = $(".cont_input");
-		var val;
-		var name;
-		var data = {};
-		for (var i = 0; i < value.length; i++) {
-			 name = $(value[i]).attr('name');
-			 val = $(value[i]).val();
-			 val = $.trim(val);
+		 data[name] = val;
 
-			 data[name] = val;
-
-			
-		}
-		    $.ajax({
-		        url: '../includes/main.php?contacts_change',
-		        type: 'POST',
-		        data: data,
-		       	dataType: 'json',
-		        success: function( data, textStatus, jqXHR ){
-		            // Если все ОК
-		            if( typeof data.error === 'undefined' ){
-		                // если Файлы успешно загружены
-		              	var status = data.status;
-		              	 console.log(status);
-		              	 console.log(data);
-		              	 alert('Данные сохранены');
-		              	 location.reload();	
-		            }
-		            else{
-		                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
-		            }
-		        },
-		        error: function( jqXHR, textStatus, errorThrown ){
-		            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-		        }
-		    });	
+		
+	}
+	    $.ajax({
+	        url: '../includes/main.php?contacts_change',
+	        type: 'POST',
+	        data: data,
+	       	dataType: 'json',
+	        success: function( data, textStatus, jqXHR ){
+	            // Если все ОК
+	            if( typeof data.error === 'undefined' ){
+	                // если Файлы успешно загружены
+	              	var status = data.status;
+	              	 console.log(status);
+	              	 console.log(data);
+	              	 alert('Данные сохранены');
+	              	 location.reload();	
+	            }
+	            else{
+	                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+	            }
+	        },
+	        error: function( jqXHR, textStatus, errorThrown ){
+	            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+	        }
+	    });	
 	});
+	//удаление ряда фоток
+	$('.gallery ul span').click(function(evt){
+		var element = evt.currentTarget;	//возьмем элемент от которого пришло событие
+		var parent = $(element).closest("ul");  //узнаем его первого ul одителя 
+		var elements = $(parent).find('.gallery-box__image'); //получим нужные нам элементы
+		var bgImages = new Array; //масив для хранения путей к фоткам
+		for (var i = 0; i < elements.length; i++) {
+			bgImages[i] = $(elements[i]).css('background-image');
+		}
+		
+		console.log(bgImages);
+	})	
 		
 
 	console.log("ds");

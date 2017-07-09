@@ -13,15 +13,14 @@
 			<div style="cursor: pointer;" id="save_row" ">Сохранить ряд</div>	
 		</div>
 		<div class="content">
-		<?php echo ( show_normal_size_photo("temporarily") ); ?>
+		<?php echo ( show_normal_size_photo($config['tmp']) ); ?>
 		    <div class="gallery">
 		    	
-				<?php //echo ( show_photo_r("index_photo") );
-				$x = show_photo_r("index_photo");
-				print_r($x);
-				 ?>		
+				<?php echo ( show_photo_r($config['index']) );?>		
 			</div>
 		</div>
-<?php
- 	require_once("footer_ad.php"); 								//подключим footer 
-?>
+<?php require_once("footer_ad.php"); 	//подключим footer ?>
+<script>
+
+	//ещё нужно взять данные с первого ul на странице чтобы узнать с какой таблицы удалить запись дале кидаем на сервер дале рубаем на масив управляемся например путями all_photos/photo/ дале проверяем есть ли такие файли и есть ли такие записи в таблице если все ок чистим)))
+</script>

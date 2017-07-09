@@ -33,3 +33,26 @@
 	cursor: pointer;
 	margin-bottom: 20px;
 }
+.gallery ul{
+	position: relative;
+	span{
+		display: inline-block;
+		border-radius: 4px;
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		background-color: #000;
+		z-index: 100;
+		color:red;
+		right: 0;
+		top: 0;
+		cursor: pointer;
+		transition: 200;
+	}
+	span:hover{
+		background-color: #580000;
+	}
+	span::before{
+		content: "x";
+	}
+}

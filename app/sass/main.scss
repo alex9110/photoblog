@@ -113,6 +113,9 @@ nav{
 			position: relative;
 			float: left;
 		}
+		span{
+			display: none;
+		}
 	}
 }
 .gallery-box {
@@ -144,18 +147,6 @@ nav{
 
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//
 
-#box11, #box12, #box13{
-	width: 32.3333%;
-}
-#box11 .heigth, #box12 .heigth, #box13 .heigth{
-	padding-top: 66.666%;
-}
-#box21, #box22, #box23, #box24{
-	width: 24%;
-}
-#box21 .heigth, #box22 .heigth, #box23 .heigth, #box24 .heigth{
-	padding-top: 66.666%;
-}
 footer{
 	background-color: #F5F9FF;
 	text-align: center;
