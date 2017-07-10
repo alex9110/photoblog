@@ -127,9 +127,18 @@ $(function(){
 		    });
 		});
 	$('#save_row').click(function( event ){
-		var currentWork = $('#photo_wall').attr("class");
+		var li = $('.temporarily li');
+
+		if (li.length == 0) {		//если во временном ряде пусто выходим ис функцыи
+			alert('сначала загрузите фото');
+			console.log(li);
+			return;
+		}
+		var currentWork =$('.gallery ul:first-child').attr('class'); //узнать клас он же имя текущей таблицы
+		//в случае успеха добавить контент в div с класом gallery
 		$( ".gallery" ).load( '../includes/main.php?save_row='+currentWork+'', function() {
 		  console.log( "Load was performed." );
+		  //выведем сообщение
 		   $('.temporarily').html("Ряд с фотками сохранен можите выбрать еще");
 		});
 	});
@@ -160,48 +169,47 @@ $(function(){
 	    });
 	});
 	//отправка данных для измениения информацыи в профаил
-		$('#avatar').change(function(){
-		    files = this.files;
-		});
-		$('#save_profile').click(function( event ){
-			console.log("clik");
-			var title = $('#title').val();
-			var article = $('#article').val();
-		  
-		    // Создадим данные формы и добавим в них данные файлов из files
-		    var data = new FormData();
-		    $.each( files, function( key, value ){
-		        data.append( key, value );
-		    });
-		    // Отправляем запрос
-		    $.ajax({
-		        url: '../includes/main.php?profile&title='+title+'&article='+article+'',
-		        type: 'POST',
-		        data: data,
-		        cache: false,
-		        dataType: 'json',
-		        processData: false, // Не обрабатываем файлы (Don't process the files)
-		        contentType: false, // Так jQuery скажет серверу что это строковой запрос
-		        success: function( data, textStatus, jqXHR ){
-		            // Если все ОК
-		            if( typeof data.error === 'undefined' ){
-		                // если Файлы успешно загружены
-		                var data = data.status;
-		                 console.log(data);
-		                // $('#answer').append(album);
-		               // location.reload();
-		                
-		            }
-		            else{
-		                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
-		            }
-		        },
-		        error: function( jqXHR, textStatus, errorThrown ){
-		            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-		        }
-		    });
-		 
-		});
+	$('#avatar').change(function(){
+	    files = this.files;
+	});
+	$('#save_profile').click(function( event ){
+		console.log("clik");
+		var title = $('#title').val();
+		var article = $('#article').val();
+	  
+	    // Создадим данные формы и добавим в них данные файлов из files
+	    var data = new FormData();
+	    $.each( files, function( key, value ){
+	        data.append( key, value );
+	    });
+	    // Отправляем запрос
+	    $.ajax({
+	        url: '../includes/main.php?profile&title='+title+'&article='+article+'',
+	        type: 'POST',
+	        data: data,
+	        cache: false,
+	        dataType: 'json',
+	        processData: false, // Не обрабатываем файлы (Don't process the files)
+	        contentType: false, // Так jQuery скажет серверу что это строковой запрос
+	        success: function( data, textStatus, jqXHR ){
+	            // Если все ОК
+	            if( typeof data.error === 'undefined' ){
+	                // если Файлы успешно загружены
+	                var data = data.status;
+	                 console.log(data);
+	                // $('#answer').append(album);
+	               // location.reload();
+	                
+	            }
+	            else{
+	                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+	            }
+	        },
+	        error: function( jqXHR, textStatus, errorThrown ){
+	            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+	        }
+	    });
+	});
 //смена информацыи контакты
 	$(".but").click(function(evt){
 	var value = $(".cont_input");
@@ -212,10 +220,7 @@ $(function(){
 		 name = $(value[i]).attr('name');
 		 val = $(value[i]).val();
 		 val = $.trim(val);
-
-		 data[name] = val;
-
-		
+		 data[name] = val;	
 	}
 	    $.ajax({
 	        url: '../includes/main.php?contacts_change',
@@ -241,19 +246,55 @@ $(function(){
 	        }
 	    });	
 	});
-	//удаление ряда фоток
-	$('.gallery ul span').click(function(evt){
+	//удаление ряда фоток вешаем обратчик на родительский элемент, в инном 
+	//случае клик по только подгруженых с помощю аякса элементах не даст результата 
+	$('.gallery ').on('click', 'span', function(evt){
+		evt.stopPropagation();
+		var table_name = $('.gallery ul:first-child').attr('class');	//узнаем имя таблицы с данними об текущих фотках
 		var element = evt.currentTarget;	//возьмем элемент от которого пришло событие
+		console.log(evt);
 		var parent = $(element).closest("ul");  //узнаем его первого ul одителя 
 		var elements = $(parent).find('.gallery-box__image'); //получим нужные нам элементы
-		var bgImages = new Array; //масив для хранения путей к фоткам
+		var path = new Array; //масив для хранения путей к фоткам
+		var data = new Object;
 		for (var i = 0; i < elements.length; i++) {
-			bgImages[i] = $(elements[i]).css('background-image');
+			path[i] = $(elements[i]).css('background-image');
 		}
-		
-		console.log(bgImages);
+		data.table = table_name;
+		data.path = path;
+		// console.log(data);
+		$.ajax({
+		    url: '../includes/main.php?remuve_rov',
+		    type: 'POST',
+		    data: data,
+		   	dataType: 'json',
+		    success: function( data, textStatus, jqXHR ){
+		        // Если все ОК
+		        if( typeof data.error === 'undefined' ){
+		            // если Файлы успешно загружены
+		          	var status = data.status;
+		          	 if (status) {
+		          	 	var sibl = $(parent).siblings();  //посмотрим есть в ul сиблинги тоесть другие ряды ul
+		          	 	//нельзя удалять все и отавлять страницу в таком состоянии иначе программа не будет знать класса и 
+		          	 	//соответственно таблицы в которую следует добавить информацыю
+		          	 	 if (sibl.length > 0) {
+		          	 		$(parent).remove();
+		          	 	 }else{
+		          	 	 	location.reload();
+		          		  }
+		          	 }
+		          	// console.log(status);
+		          	 console.log(data);  
+		        }
+		        else{
+		            console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+		        }
+		    },
+		    error: function( jqXHR, textStatus, errorThrown ){
+		        console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+		    }
+		});	
 	})	
-		
+		console.log("ok");
 
-	console.log("ds");
 });

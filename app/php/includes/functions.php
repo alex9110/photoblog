@@ -154,11 +154,11 @@
 		$data = get_data($table_name);
 		$path = $config['img_folder'].'example.jpg'; //путь к стандартной каотинке
 		$content = ""; 
-		$ul = '<ul id="photo_wall" class="'.$table_name.'">';
+		$ul = '<ul class="'.$table_name.'">';
 		$li = "";
 		$max = 0;
 		//зададим клас чтобы всекда знать какой именно альбом мы показываем
-		$content ='<ul id="photo_wall" class="'.$table_name.'"><li class="gallery-box" style="width:44%">'.
+		$content ='<ul class="'.$table_name.'"><li class="gallery-box" style="width:44%">'.
 			 		  '<div class="heigth" style="padding-top:66.666%"></div>'.
 			 	 	  '<div class="gallery-box__image" style="background-image: url('.$path.')"></div>'.
 		 		  '</li><p style="margin-top:50px;">Привет, в этом альбоме пока что нет фото, но это ненадоло)</p></ul>';
@@ -204,7 +204,7 @@
 		 	
 		 	if ($max > 95) {
 		 		$ul .= "<span></span></ul>";
-		 		$ul .= "<ul>".$li;
+		 		$ul .= '<ul class="'.$table_name.'">'.$li;
 		 		$max = 0;
 		 	}else{
 		 		$ul .= $li;
@@ -407,6 +407,28 @@
 		  $data = $error ? array('error' => 'Ошибка загрузки файлов.') : array('status' => "фото сохранено", 'photo_name'=>$new_name);
 		    return $data;
 	}
+	//изменения данных страницы профаил
+	function change_profile($photo_name, $title, $article){
+	    $config = config();
+	    $table_name = $config['profile'];
+	    $arr = get_data($table_name);
+	    $connection = connect_db();
+	   // проверим не наличия записи в нашей таблице 
+	    if ( count($arr) > 0 ) {
+	      $query = "UPDATE {$table_name} SET photo_name = '$photo_name', article_title = '$title', article_text = '$article'"; 
+	    }else{
+	      $query = "INSERT INTO {$table_name} (id, photo_name, article_title, article_text) VALUES (NULL, '$photo_name', '$title', '$article')"; 
+	    }
+	   
+	    $result  = mysqli_query($connection, $query);
+	    //проверяем нет ли ошибок запроса
+	    if (!$result) {
+	      die("database query faled.");
+	    }
+	     //5закрыть соединение
+	    mysqli_close($connection);
+	    return true;
+	  }
  //создания и соранения альбома 
 	function сreate_album($photo, $title, $desc){
 		$config = config();
@@ -523,33 +545,7 @@
 		
 		mysqli_close($connection);
 	}
-
-//перейменования фоток
-	function rename_photo($old_name){
-		$config = config();
-		if ($old_name !="") {
-			//узнаем расширение файла, картинки
-			$arr = array();                               		 // создам массив он мне нужен 
-	        $arr = explode(".", $old_name);               		 //дробим имя на масив регулируемся точкой
-	        $file_extension = ".".end($arr);                    //берём последний елемент массива лепим точку теперь имеем разширение файла
-		}
-		$random_name = uniqid('img_');		//генерируем случайное имя
-		$new_name = $random_name.$file_extension;
-		//если фаил с таким именем уже есть добавим к имени 'x2'
-		$exist = file_exists($new_name);
-		if ($exist) {
-			$rand = rand(0, 100);
-			$new_name = 'x'.$rand.$new_name;
-			$exist = file_exists($new_name); //проверим еще раз
-		}
-		if ($exist) {
-			$rand = rand(0, 100);
-			$new_name = 'x2'.$rand.$new_name;
-		}
-
-		return $new_name;
-	}
-//изменить доп услуги
+	//изменить доп услуги
 	function change_extra_services($text){
 	  $config = config();
 	  $table_name = $config['extra_service'];
@@ -585,13 +581,41 @@
 		 	}
 			mysqli_close($connection);
 	}
+
+//перейменования фоток
+	function rename_photo($old_name){
+		$config = config();
+		if ($old_name !="") {
+			//узнаем расширение файла, картинки
+			$arr = array();                               		 // создам массив он мне нужен 
+	        $arr = explode(".", $old_name);               		 //дробим имя на масив регулируемся точкой
+	        $file_extension = ".".end($arr);                    //берём последний елемент массива лепим точку теперь имеем разширение файла
+		}
+		$random_name = uniqid('img_');		//генерируем случайное имя
+		$new_name = $random_name.$file_extension;
+		//если фаил с таким именем уже есть добавим к имени 'x2'
+		$exist = file_exists($new_name);
+		if ($exist) {
+			$rand = rand(0, 100);
+			$new_name = 'x'.$rand.$new_name;
+			$exist = file_exists($new_name); //проверим еще раз
+		}
+		if ($exist) {
+			$rand = rand(0, 100);
+			$new_name = 'x2'.$rand.$new_name;
+		}
+
+		return $new_name;
+	}
+
 	//удалть фото принимает путь и таблицу с которой нужно удалить запись об этой фотке
 	function remove_photo($path, $table){
-			$arr = array();                               		// создам массив он мне нужен 
-	        $arr = explode("/", $path);               		 //дробим путь на масив регулируемся /
-	        $name = end($arr);                   			 //берём последний елемент массива теперь имеем имя
-	       
-		 $del = unlink ( $path );
+
+		$arr = array();                               		// создам массив он мне нужен 
+        $arr = explode("/", $path);               		 //дробим путь на масив регулируемся /
+        $name = end($arr);                   			 //берём последний елемент массива теперь имеем имя
+	    $path = '../../'.$path; 
+		 $del = unlink( $path );
 		 if ($del == true) {
 			$connection = connect_db();
 			$query = "DELETE FROM {$table} WHERE name = '$name'";
@@ -601,7 +625,9 @@
 		 		die("database query faled.");
 		 	}
 			mysqli_close($connection);
+			return true;
 		 }
+		 return false;
 	}
 	//функцыя для задания размеров фоткам таким образом чтобы все были выровняны по высоте и вмещались в один ряд
 	//парамеры масив с путями к фоткам

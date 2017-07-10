@@ -1,16 +1,15 @@
  <?php 
  require_once("functions.php");
 require_once("config.php");
+
 //смена контактов
-if( isset($_GET['contacts_change']) ) {
- 
+if( isset($_GET['contacts_change']) ) { 
   $data = array();
   $data['status'] = "ok";
   if ( set_contacts() ) {
      echo json_encode($data);
    } 
 }
-
  //если гетом пришли данные с ключом uploadfiles сохранить эти фотки
 if( isset( $_GET['uploadfiles'] ) ){
     // Здесь можно сделать все проверки передаваемых файлов и вывести ошибки если нужно
@@ -106,26 +105,27 @@ if( isset( $_GET['profile'] ) ){
     }
   echo json_encode($data);
 }
-function change_profile($photo_name, $title, $article){
-    $config = config();
-    $table_name = $config['profile'];
-    $arr = get_data($table_name);
-    $connection = connect_db();
-   // проверим не наличия записи в нашей таблице 
-    if ( count($arr) > 0 ) {
-      $query = "UPDATE {$table_name} SET photo_name = '$photo_name', article_title = '$title', article_text = '$article'"; 
-    }else{
-      $query = "INSERT INTO {$table_name} (id, photo_name, article_title, article_text) VALUES (NULL, '$photo_name', '$title', '$article')"; 
+
+//удаления ряда соток
+  if( isset($_GET['remuve_rov']) ) { 
+    $post = $_POST;
+    $not_ready_path = $post['path'];
+    $ready_path = array();
+    $table = $post['table'];    //имя таблицы с которой нужно удалить инфу
+    for ($i=0; $i < count($not_ready_path); $i++) {     //вытямин путя к фоткам
+      $text = $not_ready_path[$i];
+      // регулярное выражение возьмом все сиволы после all_photos//photo/ и до конца но кроме симвлов ")
+     if ( preg_match('~all_photos/photo/(.*[^")])~', $text, $result) ) {
+        $ready_path[] = $result[0];
+      }
     }
-   
-    $result  = mysqli_query($connection, $query);
-    //проверяем нет ли ошибок запроса
-    if (!$result) {
-      die("database query faled.");
+    for ($i=0; $i < count($ready_path); $i++) { 
+      if ( remove_photo($ready_path[$i], $table) ) {
+           $data['status'] = 'true';
+      }else{ $data['status'] = 'false';}
     }
-     //5закрыть соединение
-    mysqli_close($connection);
-    return true;
-  }
+//не забыть зделать предворительные проверки в функцыи удаляющей фотки и данные и научить удалять даже когда фото уже было удалено и данные
+    echo json_encode($data);  
+}
 
  ?>
