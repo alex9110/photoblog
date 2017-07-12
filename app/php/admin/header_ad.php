@@ -1,5 +1,14 @@
 <?php 
 	require_once("../includes/functions.php"); 
+	if ( login_test() ) {
+	}else{
+		redirects();
+	}
+	require_once("../includes/config.php"); 
+	require_once("../includes/main.php"); 
+//если все ок продолжаем строить страницу если нет переадресовуем на страницу входа
+	
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +33,7 @@
 						<li><a href="portfolio_ad.php">Портфолио</a></li>
 						<li><a href="price_ad.php">Услуги и цены</a></li>
 						<li><a href="profile_ad.php">Профайл</a></li>
+						<li><a href="exit.php">Выход</a></li>
 					</ul>
 				</nav>
 				<div class="social">

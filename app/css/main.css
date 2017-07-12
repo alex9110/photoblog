@@ -153,3 +153,16 @@ footer:after {
   height: 100%;
   right: 0px;
   top: 0px; }
+
+#in {
+  border: 1px solid #000;
+  position: absolute;
+  display: block;
+  width: 4%;
+  height: 40%;
+  z-index: 100;
+  left: 0%;
+  top: 0px; }
+
+#in:hover {
+  cursor: default; }

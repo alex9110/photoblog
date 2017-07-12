@@ -1,16 +1,8 @@
 <?php
-	require_once("../includes/functions.php");
-	require_once("../includes/config.php");
+	require_once("header_ad.php"); 		//подключим header
 	$config = config();
 	$album = $_GET['current']; //посмотрим какой альбом просит пользватель
-	
-	
-	// remove_info();
-	//remove_photo($config['img_folder'].'photo_12.jpg', $config['tmp']);
-	
-
-	
-require_once("header_ad.php"); 		//подключим header
+		
 ?>
 	<link rel="stylesheet" href="../../css/gallery.css">
 

@@ -1,8 +1,8 @@
 <?php 
 	require_once("header_ad.php"); 
-	require_once("../includes/functions.php"); 
-	require_once("../includes/config.php"); 
-
+	//echo (session_status());
+	//echo (session_name());
+	//$_SESSION = [];
 ?>
 
 <div class="content">

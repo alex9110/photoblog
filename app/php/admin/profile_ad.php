@@ -1,8 +1,4 @@
-<?php
- require_once("header_ad.php");
- require_once("../includes/functions.php"); 
- require_once("../includes/config.php"); 
-  ?>
+<?php require_once("header_ad.php"); ?>
 	<link rel="stylesheet" href="../../css/profile.css">
 	<link rel="stylesheet" href="../../css/form2.css">
 	<link rel="stylesheet" href="../../css/form5.css">

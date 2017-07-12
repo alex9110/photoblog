@@ -12,6 +12,10 @@
 				}
 				return($li);
 		}
+	function redirects(){
+		header('Location: login.php');
+		exit;
+	}
 //функцыя для подлючения к базе данных если все ок возвращает переменную с текущим подлючением
 	function connect_db(){
 		$config = config();			//получим настройки для подлючения к базе
@@ -25,6 +29,25 @@
 				")" .mysqli_connect_errno() . ")"				//номерошибки
 			);
 		}
+	}
+//прроверка залогинен ли пользователь
+	function login_test(){
+	// если у нас есть сессионная кука...
+		if ( !empty($_COOKIE[session_name()]) ) {
+			session_start();
+			if ( isset($_SESSION['user']) ) {
+				if ($_SESSION['user'] === 'admin') {
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+		return false;
 	}
 // функцыя вернет двохуровневый массив записей с БД
 	function get_data($table){
@@ -231,7 +254,6 @@
 		$data = get_data($table); 	//получим все днные с базы
 		//если массив пустой значит работ нет
 		if (count($data) < 1) {
-			//echo $content;
 			return $content;
 		}
 		$content ="";
@@ -313,7 +335,7 @@
 						'<ul>'.$li.'</ul>'.
 					'</div>';
 		}
-		echo $content;
+		return $content;
 	}
 	//сформирует контент для страницы профаил
 	function show_profile(){
