@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   min-height: 100%; }
 
@@ -82,3 +83,22 @@ form {
   form #submit:hover {
     -webkit-box-shadow: 0px 0px 3px 0px #AA0502;
             box-shadow: 0px 0px 3px 0px #AA0502; }
+
+.сhange {
+  display: inline-block;
+  min-width: 50px;
+  min-height: 20px;
+  font-size: 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #fff; }
+
+.form2 {
+  height: 400px; }
+
+form input:nth-child(n+6) {
+  background-color: #000;
+  color: #fff; }
+
+form label:nth-child(n+6) {
+  color: #000; }

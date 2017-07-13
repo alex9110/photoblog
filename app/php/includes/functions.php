@@ -12,8 +12,8 @@
 				}
 				return($li);
 		}
-	function redirects(){
-		header('Location: login.php');
+	function redirects($url = 'login.php'){
+		header('Location: '.$url);
 		exit;
 	}
 //функцыя для подлючения к базе данных если все ок возвращает переменную с текущим подлючением
@@ -38,16 +38,31 @@
 			if ( isset($_SESSION['user']) ) {
 				if ($_SESSION['user'] === 'admin') {
 					return true;
-				}else{
-					return false;
 				}
-			}else{
-				return false;
 			}
-		}else{
-			return false;
 		}
 		return false;
+	}
+	//проверка логина и пароля
+	function login($data){
+		$result = false;
+		$login = trim($data['login']);
+		$pas = trim($data['pas']);
+
+		if (strlen($login) < 3 || strlen($login) > 20) {
+			return false;
+		}
+		if (strlen($pas) < 4 || strlen($pas) > 20) {
+			return false;
+		}
+		$data = get_data('main');
+		$correct_login = $data[0]['name'];
+		$hash_pas = $data[0]['password'];
+		//если логин верный проверим пароль
+		if ($correct_login === $login) {
+			$result = password_verify($pas, $hash_pas);
+		}
+		return $result;
 	}
 // функцыя вернет двохуровневый массив записей с БД
 	function get_data($table){
