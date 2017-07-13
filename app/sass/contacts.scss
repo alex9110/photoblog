@@ -1,0 +1,44 @@
+.content{
+	margin-top: 100px;
+	margin-bottom: 100px;
+	text-align: center;
+}
+.contacts{
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #5F5F5F;
+	text-align: center;
+	display: inline-block;
+	width: 25%;
+	margin: 10px;
+	input{
+		width: 100%;
+		padding: 4px;
+		margin: 5px 0;
+		// margin: 5px;
+		// margin-left: 0;
+		border: 2px solid #F6A419;
+		border-radius: 4px;
+		box-shadow: 0 -1px 6px 1px #555555;
+	}
+	
+}
+.contacts:nth-child(n+10){
+	color: red;
+}
+.but{
+	border-radius: 6px;
+	box-shadow:  0 -1px 2px 0px #555555;
+	padding: 4px;
+	color: #fff;
+	text-transform: uppercase;
+	background-color: #DE5217;
+	text-align: center;
+	cursor: pointer;
+	margin-bottom: 20px;
+	letter-spacing: 1px;
+	transition:300ms;
+}
+.but:hover{
+	background-color: #E98018;
+}

@@ -1,19 +1,18 @@
 <?php require_once("header_ad.php"); ?>
-	<link rel="stylesheet" href="../../css/price.css">
-	<link rel="stylesheet" href="../../css/form2.css">
-	<link rel="stylesheet" href="../../css/form4.css">
+	<link rel="stylesheet" href="../../css/price_form.css">
 	<form id="save_form">
 		<div id="desc">
 			<div id="fileName"><p>Выбери изображения </p></div>
-			<div id="fileUpload">
+			<div id="fileUpload" class="button">
 				<label><input class="none" name="takeImg" type="file" accept="image/*" id="offer_image" onchange="getFileName ();" ><span>Выбрать</span></label>
 			</div>
-			<input placeholder="Названия услуги" maxlength="50" type="text" class="input" id="offer_name"/> 
-			<input placeholder="стоимость" maxlength="30" type="text" class="input" id="cost"/> 
+			<input placeholder="Названия услуги" maxlength="50" type="text" class="portfolio_input" id="offer_name"/> 
+			<input placeholder="стоимость" maxlength="30" type="text" class="portfolio_input" id="cost"/> 
 			<div></div> 
-			<textarea cols="70" rows="7" placeholder="Описания услуги. ВНИМАНИЕ дла обозначения нового элемента списка раздиляйте написанный вами текст знаком слеш / " maxlength="700" class="input text" id="offer_desc"></textarea>	
+			<textarea cols="70" rows="7" placeholder="Описания услуги. ВНИМАНИЕ дла обозначения нового элемента списка раздиляйте написанный вами текст знаком слеш / " maxlength="700" class="portfolio_input text" id="offer_desc"></textarea>
+			<input type="button" name="submit" value="сохранить" id="save_offer" class="save button" />	
 		</div>	
-		<input type="button" name="submit" value="сохранить" id="save_offer" class="save button" />
+		
 		<div id="preview"></div>
 		<script>// скрипт для формы сохранения закладок
 			function getFileName () { //покажем имя выбраного файла

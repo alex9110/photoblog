@@ -1,7 +1,4 @@
-<?php
-	require_once("header.php");
-	require_once("../includes/functions.php");
-?>
+<?php require_once("header.php"); ?>
 	<link rel="stylesheet" href="../../css/profile.css">
 	<div class="content">
 		<div class="about_me">

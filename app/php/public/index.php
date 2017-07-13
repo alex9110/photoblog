@@ -1,8 +1,6 @@
 <?php 
-	require_once("../includes/functions.php");
-	require_once("../includes/config.php");
-	$config = config();
 	require_once("header.php"); 		//подключим header
+	$config = config();
 ?>		
 		<div class="content">
 		    <div class="gallery">

@@ -1,19 +1,18 @@
 <?php require_once("header_ad.php"); ?>
-	<link rel="stylesheet" href="../../css/profile.css">
-	<link rel="stylesheet" href="../../css/form2.css">
-	<link rel="stylesheet" href="../../css/form5.css">
+	<link rel="stylesheet" href="../../css/profile_form.css">
 	<div class="content">
 	<form id="save_form">
 			<div id="desc">
 				<div id="fileName"><p>выберите своё фото </p></div>
-				<div id="fileUpload">
+				<div id="fileUpload" class="button">
 					<label><input class="none" type="file" accept="image/*" id="avatar" onchange="getFileName ();" ><span>Выбрать</span></label>
 				</div>
-				<input placeholder="Заголовок" maxlength="50" type="text" class="input" id="title"/> 
+				<input placeholder="Заголовок" maxlength="50" type="text" class="portfolio_input" id="title"/> 
 				<div></div>
-				<textarea cols="70" rows="7" placeholder="Статья" maxlength="700" class="input text" id="article"></textarea>
+				<textarea cols="70" rows="7" placeholder="Статья" maxlength="800" class="portfolio_input" text" id="article"></textarea>
+				<input type="button" name="submit" value="сохранить" id="save_profile" class="save button" />
 			</div>	
-			<input type="button" name="submit" value="сохранить" id="save_profile" class="save button" />
+			
 			<div id="preview"></div>
 			<script>// скрипт для формы сохранения закладок
 				function getFileName () { //покажем имя выбраного файла

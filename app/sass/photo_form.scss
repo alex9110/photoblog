@@ -1,0 +1,39 @@
+.photo_uploader{
+	border: 1px solid  #F6A419;
+	border-radius: 8px;
+	box-shadow: 0px -1px 5px 0px #323232;
+	width: 100%;
+	padding: 10px;
+}
+.uploader{
+	box-shadow: -1px 1px 1px 0px #323232;
+	background-color: #F6A419;
+	border: 1px solid 323232;
+	border-radius: 4px;
+	cursor: pointer;
+	display: inline-block;
+	padding: 3px 5px;
+	margin: 0 5px;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	color: #fff;
+	transition: 100ms;
+}
+.uploader:hover{
+	
+}
+.upload_photo{
+	padding-right: 0;
+}
+#upload_photo{
+	
+}
+#save_row{
+	background-color: #DE5217;
+	float: right;
+	font-weight: normal;
+}
+#save_row:hover{
+	background-color: #E98018;
+}

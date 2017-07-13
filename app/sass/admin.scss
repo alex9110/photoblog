@@ -1,37 +1,10 @@
-.content{
-	text-align: center;
-}
-.contacts{
-	text-transform: uppercase;
-	font-weight: bold;
-	color: #5F5F5F;
-	text-align: center;
-	display: inline-block;
-	width: 25%;
-	margin: 10px;
-	input{
-		width: 100%;
-		padding: 4px;
-		margin: 5px 0;
-		// margin: 5px;
-		// margin-left: 0;
-		border: 2px solid #4888EF;
-		border-radius: 4px;
-	}
-	
-}
-.contacts:nth-child(n+10){
-		color: red;
-}
-.but{
-	border-radius: 8px;
-	padding: 4px;
-	color: #fff;
-	text-transform: uppercase;
-	background-color: #4888EF;
-	text-align: center;
-	cursor: pointer;
-	margin-bottom: 20px;
+.admin{
+	 height: 20px;
+	 background-color: #000; 
+	 text-align: center;
+	 color: #fff;
+	 letter-spacing: 2px;
+
 }
 .gallery ul{
 	position: relative;
@@ -55,6 +28,9 @@
 	span::before{
 		z-index: 90;
 		content: "x";
+		position: absolute;
+		top: 0;
+		right: 6px;
 	}
 }
 .gallery ul::before{

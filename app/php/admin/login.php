@@ -23,7 +23,7 @@
 			if ($result === true) {
 				session_start();
 				$_SESSION['user'] = 'admin';
-				header('Location: admin.php');
+				header('Location: index_ad.php');
 				exit;
 			}	
 		}
@@ -37,20 +37,25 @@
 			}
 		}
 	}
-	
-
  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>login</title>
+	<link rel="stylesheet" href="../../css/login_form.css">
 </head>
 <body>
-	<form action="login.php" method="post">
-		<input type="text" name="login" value="<?php echo @$data['login']?>"><br>
-		<input type="text" name="pas" value="<?php echo @$data['pas']?>"><br>
-		<input type="submit" name="submit">
-	</form>
+	<div class="form">
+		<form action="login.php" method="post">
+			<label for="login">Username</label>
+			<input id="login" type="text" name="login" placeholder="Enter username" value="<?php echo @$data['login']?>"><br>
+			<label for="password">Password</label>
+			<input id="password" type="password" name="pas" placeholder="Enter password" value="<?php echo @$data['pas']?>"><br>
+			<input id="submit" type="submit" name="submit" value="Log in">
+		</form>
+	</div>
+
+	
 </body>
 </html>

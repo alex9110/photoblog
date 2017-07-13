@@ -1,0 +1,33 @@
+#desc {
+  width: 400px; }
+
+#preview {
+  border: 1px solid #F6A419;
+  background-color: #fff;
+  width: 200px;
+  height: 300px;
+  display: inline-block;
+  -webkit-background-size: contain;
+          background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+#extra_service {
+  border: 1px solid  #F6A419;
+  -webkit-border-radius: 6px;
+          border-radius: 6px;
+  background-color: #F1F1F1; }
+
+#service_desc {
+  border: 1px solid  #F6A419;
+  margin: 5px; }
+
+#service_but {
+  border: 1px solid  #F6A419;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  width: auto;
+  padding: 2px 5px;
+  cursor: pointer;
+  background-color: #F6A419;
+  color: #fff; }
