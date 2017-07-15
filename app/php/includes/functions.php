@@ -30,6 +30,30 @@
 			);
 		}
 	}
+	//установыть новый logi и password
+	function new_log_pas($login, $pas, $pas2){
+		$config = config();
+		$table = $config['main'];
+		if ( valid($login, $pas) ) {
+			if ($pas2 === $pas) {
+				$hash = password_hash($pas, PASSWORD_BCRYPT);  //хешируем значение перед отравкой браузеру
+				$connection = connect_db();
+				$login = mysqli_real_escape_string($connection, $login);
+				$query = "UPDATE {$table} SET name = '$login', password = '$hash' WHERE id = 1"; 
+				$result  = mysqli_query($connection, $query);
+				//проверяем нет ли ошибок запроса
+			 	if (!$result) {
+			 		die("database query faled.");
+			 	}			
+				 //5закрыть соединение
+				mysqli_close($connection);
+				if ($result === true) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 //прроверка залогинен ли пользователь
 	function login_test(){
 	// если у нас есть сессионная кука...
@@ -43,19 +67,26 @@
 		}
 		return false;
 	}
-	//проверка логина и пароля
-	function login($data){
+	//проверим коректность введенных данных
+	function valid($login, $pas){
 		$result = false;
-		$login = trim($data['login']);
-		$pas = trim($data['pas']);
+		$login = trim($login);
+		$pas = trim($pas);
 
-		if (strlen($login) < 3 || strlen($login) > 20) {
+		if (strlen($login) < 3 || strlen($login) > 10) {
 			return false;
 		}
 		if (strlen($pas) < 4 || strlen($pas) > 20) {
 			return false;
 		}
-		$data = get_data('main');
+		return true;
+	}
+	//проверка логина и пароля
+	function login($login, $pas){
+		$config = config();
+		$table = $config['main'];
+		$result = false;
+		$data = get_data($table);
 		$correct_login = $data[0]['name'];
 		$hash_pas = $data[0]['password'];
 		//если логин верный проверим пароль
@@ -65,9 +96,14 @@
 		return $result;
 	}
 // функцыя вернет двохуровневый массив записей с БД
-	function get_data($table){
+//все рады если второй параметр не задан или конкретный ряд если зада
+	function get_data($table, $column = '*', $where = false){
 		$connection = connect_db(); //подключится к базе
-		$query = "SELECT * FROM {$table}"; 
+		$query = "SELECT {$column} FROM {$table}"; 
+		//если задан третий параметр формируем запрос с учетом этого параметра
+		if ($where) {
+			$query = "SELECT {$column} FROM {$table} {$where}";
+		}
 		$result  = mysqli_query($connection, $query);
 		//проверяем нет ли ошибок запроса
 	 	if (!$result) {
@@ -172,18 +208,19 @@
 		}
 			return $ul.'</ul>';				
 	}
-		function show_all_contacts(){
-				$config = config();
-				$table = $config['contacts'];
-				$data = get_data($table);
-				$li = '';
-				for ($i=0; $i < count($data); $i++) { 
-					$name = $data[$i]['name'];
-					$value = $data[$i]['value'];
-					$li .= '<li class="contacts"><p>'.$name.'</p><input name="'.$name.'" type="text" value="'.$value.'" class="cont_input"></li>';
-				}
-				return $li;
-		}
+	//показать все контакты
+	function show_all_contacts(){
+			$config = config();
+			$table = $config['contacts'];
+			$data = get_data($table);
+			$li = '';
+			for ($i=0; $i < count($data); $i++) { 
+				$name = $data[$i]['name'];
+				$value = $data[$i]['value'];
+				$li .= '<li class="contacts"><p>'.$name.'</p><input name="'.$name.'" type="text" value="'.$value.'" class="cont_input"></li>';
+			}
+			return $li;
+	}
 
 //функцыя вернет строку все фотки в виде не нумерованого списка ul, параметры 1имя таблицы с которой нужно взять фтки
 //не обезятельные параметры, 2с какого ряда начать брать фотки 3сколько рядов взять	
@@ -199,7 +236,7 @@
 		$content ='<ul class="'.$table_name.'"><li class="gallery-box" style="width:44%">'.
 			 		  '<div class="heigth" style="padding-top:66.666%"></div>'.
 			 	 	  '<div class="gallery-box__image" style="background-image: url('.$path.')"></div>'.
-		 		  '</li><p style="margin-top:50px;">Привет, в этом альбоме пока что нет фото, но это ненадоло)</p></ul>';
+		 		  '</li><p style="margin-top:50px; ">Привет, в этом альбоме пока что нет фото, но это ненадоло)</p></ul>';
 		if (count($data) < 1) {
 			return $content;	 //если альбом пустой вернем стандартное значение			
 		}
@@ -241,7 +278,7 @@
 		 		  '</li>';
 		 	
 		 	if ($max > 95) {
-		 		$ul .= "<span></span></ul>";
+		 		$ul .= '<span class="delete"></span></ul>';
 		 		$ul .= '<ul class="'.$table_name.'">'.$li;
 		 		$max = 0;
 		 	}else{
@@ -249,7 +286,7 @@
 		 	} 	
 		 	$max += $width +1;		//если сумарная ширина фоток с марджинами будет блиска к 100% нужно запихнуть li в ul
 		}
-			return $ul.'<span></span></ul>';				
+			return $ul.'<span class="delete"></span></ul>';				
 	}
 
 	//показать альбомы
@@ -278,7 +315,7 @@
 			$desc = $data[$i]["job_description"];  
 			$table = $data[$i]["table_photo"];	//таблица с фотками данного альбома
 
-			$content .= '<div class="rubric_box">'.
+			$content .= '<div class="rubric_box"><span class="delete '.$table.'"></span>'.
 							'<a href="gallery.php?current='.$table.'"></a>'.
 							'<img src="'.$path.'" class="rubric">'.
 							'<div class="designation">'.
@@ -502,6 +539,7 @@
 		mysqli_close($connection);
 		return true;
 	}
+	//создать предложения в услуги и цены
 	function create_offer($photo_name, $offer_name, $cost, $desc){
 		   $config = config();
 		   $table = $config['price'];
@@ -646,16 +684,20 @@
 	}
 
 	//удалть фото принимает путь и таблицу с которой нужно удалить запись об этой фотке
-	function remove_photo($path, $table){
+	function remove_photo($path, $table, $where=false){
 
 		$arr = array();                               		// создам массив он мне нужен 
         $arr = explode("/", $path);               		 //дробим путь на масив регулируемся /
-        $name = end($arr);                   			 //берём последний елемент массива теперь имеем имя
-	    $path = '../../'.$path; 
+        $name = end($arr);                   			 //берём последний елемент массива теперь имеем имя 
 		 $del = unlink( $path );
-		 if ($del == true) {
+		 if ($del === true) {
 			$connection = connect_db();
 			$query = "DELETE FROM {$table} WHERE name = '$name'";
+			if ($where) {
+				$query = "DELETE FROM {$table} {$where}";
+				//$query = "SELECT {$column} FROM {$table} {$where}";
+			}
+			
 			$result  = mysqli_query($connection, $query);
 			//проверяем нет ли ошибок запроса
 		 	if (!$result) {
@@ -666,6 +708,30 @@
 		 }
 		 return false;
 	}
+//удалит запись с таблицы портфолио, а также таблицу которая пренадлежит текущему альбому 
+//принимает имя таблицы текущего альбома
+	function remuve_album($table){
+    $config = config();
+    $table_name = $config['portfolio'];   //общая таблица всех альбомов       
+    $where = "WHERE table_photo = '$table'";
+    $arr = get_data($table_name, 'title_photo',  $where);
+    $photo_name = $arr[0]['title_photo'];  //имя фото на обложки альбома
+    $path = $config['аlbum_covers'].$photo_name;
+
+    if ( remove_photo($path, $table_name, $where) ) {
+      $connection = connect_db(); //подключится к базе
+    // удалить таблицу альбома 
+      $query = "DROP TABLE {$table};";
+      $result  = mysqli_query($connection, $query);
+       if (!$result) {
+        die("database query faled.");
+      } 
+     //5закрыть соединение
+      mysqli_close($connection);
+      return true;
+    }
+     return false;
+  }
 	//функцыя для задания размеров фоткам таким образом чтобы все были выровняны по высоте и вмещались в один ряд
 	//парамеры масив с путями к фоткам
 	//вернет 2уровневый массив с первый уровень елемент в торой путь и свойства нужная ширина и высота

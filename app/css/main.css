@@ -98,8 +98,9 @@ nav {
     .gallery ul li {
       position: relative;
       float: left; }
-    .gallery ul span {
-      display: none; }
+
+span.delete {
+  display: none; }
 
 .gallery-box {
   background-color: #ccc;

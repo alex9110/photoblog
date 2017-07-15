@@ -113,10 +113,10 @@ nav{
 			position: relative;
 			float: left;
 		}
-		span{
-			display: none;
-		}
 	}
+}
+span.delete{
+	display: none;
 }
 .gallery-box {
 	background-color: #ccc;

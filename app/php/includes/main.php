@@ -1,7 +1,5 @@
  <?php 
  require_once("functions.php");
-require_once("config.php");
-
 //смена контактов
 if( isset($_GET['contacts_change']) ) { 
   $data = array();
@@ -120,12 +118,30 @@ if( isset( $_GET['profile'] ) ){
       }
     }
     for ($i=0; $i < count($ready_path); $i++) { 
-      if ( remove_photo($ready_path[$i], $table) ) {
+      $full_path = '../../'.$ready_path[$i];
+      if ( remove_photo($full_path, $table) ) {
            $data['status'] = 'true';
       }else{ $data['status'] = 'false';}
     }
 //не забыть зделать предворительные проверки в функцыи удаляющей фотки и данные и научить удалять даже когда фото уже было удалено и данные
     echo json_encode($data);  
 }
+//удаления альбома
+  if( isset($_GET['remuve_album']) ) { 
+   $table_name = $_POST['table'];
+   //проверим нет ли в альбрме фоток
+   $arr = get_data($table_name, 'id');
+   if (!count($arr) > 0) {
+      $data = array();
+      if ( remuve_album($table_name) ) {
+         $data['status'] = true;
+      }else{
+         $data['error'] = 'что пошло не так';
+      }
+   }else{
+     $data['error'] = 'В альбоме обнаружены фото, перед тем как удалить альбом, необходимо удалить все фото в данном альмоме';
+   }
+    echo json_encode($data);  
+}
 
- ?>
+?>

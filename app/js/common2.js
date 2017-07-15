@@ -295,6 +295,40 @@ $(function(){
 		    }
 		});	
 	})	
-		console.log("ok");
+//удаление обложки альбома
+	$('#albums ').on('click', 'span.delete', function(evt){
+		evt.stopPropagation();
+		//evt.currentTarget
+		var elem_class = $(evt.currentTarget).attr('class');
+		//последний клас елемента он же названия таблицы
+		var arr = elem_class.split(' '); //покрышим строку на мпссив регулируясь пробелом
+		var table_name = arr[arr.length - 1 ];
+		var data = new Object;
+		data.table = table_name;
+		// console.log(data);
+		$.ajax({
+		    url: '../includes/main.php?remuve_album',
+		    type: 'POST',
+		    data: data,
+		   	dataType: 'json',
+		    success: function( data, textStatus, jqXHR ){
+		        // Если все ОК
+		        if( typeof data.error === 'undefined' ){
+		            // альбом удален
+		            if (data.status) {
+		            	location.reload();
+		            }
+		          	// console.log(data);  
+		        }
+		        else{
+		        	alert(data.error);
+		        }
+		    },
+		    error: function( jqXHR, textStatus, errorThrown ){
+		        console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+		    }
+		});	
+	});
+	console.log("ff");
 
 });

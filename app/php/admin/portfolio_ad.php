@@ -32,7 +32,6 @@
 					document.getElementById('album_cover').addEventListener('change', handleFileSelect, false);
 			</script>
 		</form>
-	
-		<?php  echo( show_woks() );?>
+		<div id="albums"><?php  echo( show_woks() );?></div>
 	</div>
 <?php require_once("footer_ad.php"); ?>
