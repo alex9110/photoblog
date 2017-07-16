@@ -21,7 +21,6 @@
 		$config = config();			//получим настройки для подлючения к базе
 		//создаем подключение к базе
 		$connection = mysqli_connect($config['dbhost'], $dbuser = $config['dbuser'], $dbpass = $config['dbpass'], $config['dbname']); 
-		return $connection;
 		// проверяем подключение
 		if (mysqli_connect_errno()) {							//возвращает либо ошибку либо ноль
 			die("DAta basese connection failed: " .
@@ -29,6 +28,7 @@
 				")" .mysqli_connect_errno() . ")"				//номерошибки
 			);
 		}
+		return $connection;
 	}
 	//установыть новый logi и password
 	function new_log_pas($login, $pas, $pas2){
@@ -336,6 +336,7 @@
 		$image_name = "";
 		$li = "";
 		$content = "";
+		
 		$contact_content = "";
 		$phones= get_contacts('phone');
 		//получим наши номера телефонов
@@ -343,12 +344,32 @@
 			$value = $phones[$i]['value'];
 			$contact_content .= '<div class="tel">'.$value.'<i class="icon-phone"></i></div>';
 		}
+		//если таблица пуста дадим стандартное значение
+		if (count($data)<1) {
+			$content =  '<div class="service">'.
+							'<p class="service_name">названия услуги</p>'.
+							'<img src="'.$image_folder.'example.jpg" class="photo">'.
+								'<div class="desc">'.
+									'<p class="cost">"СТОИМОСТЬ" <br><span>12 000 ₽</span></p>'.
+									'<ul>
+									<li>- первый элемент списка,</li>
+									<li>- второй элемент списка,</li>
+									<li>- третий элемент списка,</li>
+									<li>- какой-то элемент списка,</li>
+									<li>-  последний элемент в данном списке выделяется жирным шрифтом, пример ниже,</li>
+									<li>- детальней за телефонами.</li>
+									</ul>'.
+								'</div>'.
+							'<div class="phones">'.$contact_content.'</div>'.
+						'</div>';
+		}
 		for ($i=0; $i < count($data); $i++) { 
+			$id = 'i'.$data[$i]['id'];
 			$service_name = $data[$i]['service_name'];
 			$cost = $data[$i]['cost'];
 			$image_name = $data[$i]['image_name'];
 			$li = build_list($data[$i]['description']);		
-			$content .= '<div class="service">'.
+			$content .= '<div class="service"><span class="delete '.$id.'"></span>'.
 							'<p class="service_name">'.$service_name.'</p>'.
 							'<img src="'.$image_folder.$image_name.'" class="photo">'.
 								'<div class="desc">'.
@@ -695,7 +716,7 @@
 			$query = "DELETE FROM {$table} WHERE name = '$name'";
 			if ($where) {
 				$query = "DELETE FROM {$table} {$where}";
-				//$query = "SELECT {$column} FROM {$table} {$where}";
+			
 			}
 			
 			$result  = mysqli_query($connection, $query);

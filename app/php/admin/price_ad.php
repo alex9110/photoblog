@@ -9,7 +9,7 @@
 			<input placeholder="Названия услуги" maxlength="50" type="text" class="portfolio_input" id="offer_name"/> 
 			<input placeholder="стоимость" maxlength="30" type="text" class="portfolio_input" id="cost"/> 
 			<div></div> 
-			<textarea cols="70" rows="7" placeholder="Описания услуги. ВНИМАНИЕ дла обозначения нового элемента списка раздиляйте написанный вами текст знаком слеш / " maxlength="700" class="portfolio_input text" id="offer_desc"></textarea>
+			<textarea cols="70" rows="7" placeholder="Описания услуги. ВНИМАНИЕ, для обозначения нового элемента списка, необходимо в начале каждого следующего елемента, кроме самого первого ставить знак слеш / " maxlength="700" class="portfolio_input text" id="offer_desc"></textarea>
 			<input type="button" name="submit" value="сохранить" id="save_offer" class="save button" />	
 		</div>	
 		

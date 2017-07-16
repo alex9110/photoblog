@@ -51,3 +51,7 @@ span.delete:hover {
   -webkit-transform: scale(1.2);
       -ms-transform: scale(1.2);
           transform: scale(1.2); }
+
+.service span.delete {
+  right: 6px;
+  top: 40px; }

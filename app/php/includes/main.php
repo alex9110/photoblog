@@ -1,5 +1,6 @@
  <?php 
  require_once("functions.php");
+
 //смена контактов
 if( isset($_GET['contacts_change']) ) { 
   $data = array();
@@ -105,7 +106,7 @@ if( isset( $_GET['profile'] ) ){
 }
 
 //удаления ряда соток
-  if( isset($_GET['remuve_rov']) ) { 
+  if( isset($_GET['remove_rov']) ) { 
     $post = $_POST;
     $not_ready_path = $post['path'];
     $ready_path = array();
@@ -127,7 +128,7 @@ if( isset( $_GET['profile'] ) ){
     echo json_encode($data);  
 }
 //удаления альбома
-  if( isset($_GET['remuve_album']) ) { 
+  if( isset($_GET['remove_album']) ) { 
    $table_name = $_POST['table'];
    //проверим нет ли в альбрме фоток
    $arr = get_data($table_name, 'id');
@@ -139,8 +140,28 @@ if( isset( $_GET['profile'] ) ){
          $data['error'] = 'что пошло не так';
       }
    }else{
-     $data['error'] = 'В альбоме обнаружены фото, перед тем как удалить альбом, необходимо удалить все фото в данном альмоме';
+     $data['error'] = 'В альбоме обнаружены фото, перед тем как удалить альбом, необходимо удалить все фото в данном альбоме';
    }
+    echo json_encode($data);  
+}
+//удаления альбома
+  if( isset($_GET['remove_offer']) ) { 
+    $data = array();
+    $config = config();
+    $table_name = $config['price'];
+    $record_id = $_POST['id'];
+
+   //отбросим первый символ что бы получить чистый id записи
+    $record_id = substr( $record_id, 1);
+    $where = "WHERE id = '$record_id'";
+    $arr = get_data($table_name, 'image_name', $where);
+    $image_name = $arr[0]['image_name'];
+    $path = $config['price_image'].$image_name;
+     if ( remove_photo($path, $table_name, $where)) {
+        $data['status'] = true;
+     }else{
+       $data['error'] = 'что пошло не так';
+     }
     echo json_encode($data);  
 }
 

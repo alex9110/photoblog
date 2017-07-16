@@ -1,5 +1,6 @@
 <?php 
 	require_once("../includes/functions.php");
+	require_once("db_start.php");
 	//проверим залогинен ли
 	if ( login_test() ) {
 		redirects('index_ad.php');
@@ -40,9 +41,62 @@
 			}
 		}else{
 			$result = '<p style="color:red;">логин или пароль не верный</p>';
+		}	
+	}
+
+	//функцыя новой базы данных
+	function create_db($db_name){
+	    $config = config();     //получим настройки для подлючения
+	    // соединение с сервером базы данных
+	    $connection = mysqli_connect($config['dbhost'], $dbuser = $config['dbuser'], $dbpass = $config['dbpass']); 
+	    // проверяем подключение
+	    if (mysqli_connect_errno()) {             //возвращает либо ошибку либо ноль
+	      die("DAta basese connection failed: " .
+	        mysqli_connect_error() .            //ошмбка
+	        ")" .mysqli_connect_errno() . ")"       //номерошибки
+	      );
+	    }
+		//создадим новую базу данных
+		$query = "CREATE DATABASE {$db_name}";
+		$result  = mysqli_query($connection, $query);
+		//проверяем нет ли ошибок запроса
+	 	if (!$result) {
+	 		die("database query faled.");
+	 	}else{
+	 		return true;
+	 	}
+		 //5закрыть соединение
+		mysqli_close($connection);
+		return false;
+	}
+//подключимся к новосозданной базе
+	function connec_new_db(){
+		$config = config();			//получим настройки для подлючения к базе
+		//создаем подключение к базе
+		$connection = mysqli_connect($config['dbhost'], $dbuser = $config['dbuser'], $dbpass = $config['dbpass'], 'test22'); 
+		// проверяем подключение
+		if (mysqli_connect_errno()) {							//возвращает либо ошибку либо ноль
+			die("DAta basese connection failed: " .
+				mysqli_connect_error() .						//ошмбка
+				")" .mysqli_connect_errno() . ")"				//номерошибки
+			);
 		}
-		
-	}	
+		return $connection;
+	}
+	function create_tables(){
+		$connection = connec_new_db();
+		$data = receive_requests();
+		for ($i=0; $i < count($data); $i++) { 
+			$query = $data[$i]; 
+			$result  = mysqli_query($connection, $query);
+			if (!$result) {
+				die("database query faled.");
+			}
+		}
+		mysqli_close($connection);
+	}
+
+	//create_tables();
  ?>
 <!DOCTYPE html>
 <html lang="en">

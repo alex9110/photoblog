@@ -49,3 +49,8 @@ span.delete:hover{
 	border: 2px solid #DE5217;
 	transform:scale(1.2); 
 }
+//для услуги и цены
+.service span.delete{
+	right: 6px;
+	top: 40px;
+}

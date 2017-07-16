@@ -252,7 +252,6 @@ $(function(){
 		evt.stopPropagation();
 		var table_name = $('.gallery ul:first-child').attr('class');	//узнаем имя таблицы с данними об текущих фотках
 		var element = evt.currentTarget;	//возьмем элемент от которого пришло событие
-		console.log(evt);
 		var parent = $(element).closest("ul");  //узнаем его первого ul одителя 
 		var elements = $(parent).find('.gallery-box__image'); //получим нужные нам элементы
 		var path = new Array; //масив для хранения путей к фоткам
@@ -264,7 +263,7 @@ $(function(){
 		data.path = path;
 		// console.log(data);
 		$.ajax({
-		    url: '../includes/main.php?remuve_rov',
+		    url: '../includes/main.php?remove_rov',
 		    type: 'POST',
 		    data: data,
 		   	dataType: 'json',
@@ -283,8 +282,6 @@ $(function(){
 		          	 	 	location.reload();
 		          		  }
 		          	 }
-		          	// console.log(status);
-		          	 console.log(data);  
 		        }
 		        else{
 		            console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
@@ -307,7 +304,7 @@ $(function(){
 		data.table = table_name;
 		// console.log(data);
 		$.ajax({
-		    url: '../includes/main.php?remuve_album',
+		    url: '../includes/main.php?remove_album',
 		    type: 'POST',
 		    data: data,
 		   	dataType: 'json',
@@ -329,6 +326,40 @@ $(function(){
 		    }
 		});	
 	});
-	console.log("ff");
+	//удаления услуги из цены и услуги
+	$('.service ').on('click', 'span.delete', function(evt){
+		evt.stopPropagation();
+		var elem_class = $(evt.currentTarget).attr('class');
+		//последний клас елемента он же id pзаписи данного предложения
+		var arr = elem_class.split(' '); //покрышим строку на мпссив регулируясь пробелом
+		var id = arr[arr.length - 1 ];
+		//console.log(id);
+		var data = new Object;
+		data.id = id;
+		$.ajax({
+		    url: '../includes/main.php?remove_offer',
+		    type: 'POST',
+		    data: data,
+		   	dataType: 'json',
+		    success: function( data, textStatus, jqXHR ){
+		        // Если все ОК
+		        if( typeof data.error === 'undefined' ){
+		            // альбом удален
+		            if (data.status) {
+		            	location.reload();
+		            	//console.log(data.status);  
+		            }
+		          	 //console.log(data);  
+		        }
+		        else{
+		        	alert(data.error);
+		        }
+		    },
+		    error: function( jqXHR, textStatus, errorThrown ){
+		        console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+		    }
+		});	
+		
+	});
 
 });
