@@ -165,9 +165,9 @@
 			  		  '</li>';
 			  	$content .= $li;
 			}
-			return '<ul class="temporarily">'.$content.'<li class = "message">не сохраненный ряд фоток можите добавить ещё фото в ряд или сохранить его в таком виде</li></ul>';	
+			return '<ul class="temporarily"><li class="message">Не сохраненный фоторяд!!! Вы можите добавить ещё фото в данный ряд или сохранить его в таком виде.</li>'.$content.'</ul>';	
 		}else{
-			return '<ul class="temporarily"><li class="message">вы пока что не выбрали ни одного фото чтобы создать новый ряд с фотками выберите фото и загрузите</li></ul>';
+			return '<ul class="temporarily"><li class="message">Временный фоторяд не обнаружен, чтобы создать новый фоторяд выберите фото и загрузите</li></ul>';
 		}				
 	}
 	//функцыя вернет строку все фотки в виде не нумерованого списка ul, параметры имя таблицы с которой нужно взять фтки
@@ -288,8 +288,6 @@
 		}
 			return $ul.'<span class="delete"></span></ul>';				
 	}
-
-	//показать альбомы
 	function show_woks(){
 		$config = config();
 		$table = $config['portfolio'];
@@ -317,7 +315,10 @@
 
 			$content .= '<div class="rubric_box"><span class="delete '.$table.'"></span>'.
 							'<a href="gallery.php?current='.$table.'"></a>'.
-							'<img src="'.$path.'" class="rubric">'.
+							'<div class="adapt_box">'.
+								'<div class="heigth"></div>'.
+								'<div class="image_box" style="background-image: url('.$path.')"></div>'.
+							'</div>'.
 							'<div class="designation">'.
 								'<h3>'.$titles.'</h3>'.
 								'<p>'.$desc.'</p>'.
@@ -326,6 +327,61 @@
 		}
 		return $content;
 	}
+	// function show_prices(){
+	// 	$config = config();
+	// 	$table_name = $config['price'];
+	// 	$data = get_data($table_name);
+	// 	$image_folder =  $config['price_image'];
+
+	// 	$service_name = "";
+	// 	$image_name = "";
+	// 	$li = "";
+	// 	$content = "";
+		
+	// 	$contact_content = "";
+	// 	$phones= get_contacts('phone');
+	// 	//получим наши номера телефонов
+	// 	for ($i=0; $i < count($phones) ; $i++) { 
+	// 		$value = $phones[$i]['value'];
+	// 		$contact_content .= '<div class="tel">'.$value.'<i class="icon-phone"></i></div>';
+	// 	}
+	// 	//если таблица пуста дадим стандартное значение
+	// 	if (count($data)<1) {
+	// 		$content =  '<div class="service">'.
+	// 						'<p class="service_name">названия услуги</p>'.
+	// 						'<img src="'.$image_folder.'example.jpg" class="photo">'.
+	// 							'<div class="desc">'.
+	// 								'<p class="cost">"СТОИМОСТЬ" <br><span>12 000 ₽</span></p>'.
+	// 								'<ul>
+	// 								<li>- первый элемент списка,</li>
+	// 								<li>- второй элемент списка,</li>
+	// 								<li>- третий элемент списка,</li>
+	// 								<li>- какой-то элемент списка,</li>
+	// 								<li>-  последний элемент в данном списке выделяется жирным шрифтом, пример ниже,</li>
+	// 								<li>- детальней за телефонами.</li>
+	// 								</ul>'.
+	// 							'</div>'.
+	// 						'<div class="phones">'.$contact_content.'</div>'.
+	// 					'</div>';
+	// 	}
+	// 	for ($i=0; $i < count($data); $i++) { 
+	// 		$id = 'i'.$data[$i]['id'];
+	// 		$service_name = $data[$i]['service_name'];
+	// 		$cost = $data[$i]['cost'];
+	// 		$image_name = $data[$i]['image_name'];
+	// 		$li = build_list($data[$i]['description']);		
+	// 		$content .= '<div class="service"><span class="delete '.$id.'"></span>'.
+	// 						'<p class="service_name">'.$service_name.'</p>'.
+	// 						'<img src="'.$image_folder.$image_name.'" class="photo">'.
+	// 							'<div class="desc">'.
+	// 								'<p class="cost">"СТОИМОСТЬ" <br><span>'.$cost.'</span></p>'.
+	// 								'<ul>'.$li.'</ul>'.
+	// 							'</div>'.
+	// 						'<div class="phones">'.$contact_content.'</div>'.
+	// 					'</div>';
+	// 	}
+	// 	return $content;
+	// }
 	function show_prices(){
 		$config = config();
 		$table_name = $config['price'];
@@ -371,7 +427,7 @@
 			$li = build_list($data[$i]['description']);		
 			$content .= '<div class="service"><span class="delete '.$id.'"></span>'.
 							'<p class="service_name">'.$service_name.'</p>'.
-							'<img src="'.$image_folder.$image_name.'" class="photo">'.
+							'<div class="photo" style="background-image:url('.$image_folder.$image_name.')"></div>'.
 								'<div class="desc">'.
 									'<p class="cost">"СТОИМОСТЬ" <br><span>'.$cost.'</span></p>'.
 									'<ul>'.$li.'</ul>'.
@@ -501,6 +557,43 @@
 		    }
 		  $data = $error ? array('error' => 'Ошибка загрузки файлов.') : array('status' => "фото сохранено", 'photo_name'=>$new_name);
 		    return $data;
+	}
+	//функцыя новой базы данных
+	function create_db($db_name){
+	    $config = config();     //получим настройки для подлючения
+	    // соединение с сервером базы данных
+	    $connection = mysqli_connect($config['dbhost'], $dbuser = $config['dbuser'], $dbpass = $config['dbpass']); 
+	    // проверяем подключение
+	    if (mysqli_connect_errno()) {             //возвращает либо ошибку либо ноль
+	      die("DAta basese connection failed: " .
+	        mysqli_connect_error() .            //ошмбка
+	        ")" .mysqli_connect_errno() . ")"       //номерошибки
+	      );
+	    }
+		//создадим новую базу данных
+		$query = "CREATE DATABASE {$db_name}";
+		$result  = mysqli_query($connection, $query);
+		//проверяем нет ли ошибок запроса
+	 	if (!$result) {
+	 		die("database query faled.");
+	 	}else{
+	 		return true;
+	 	}
+		 //5закрыть соединение
+		mysqli_close($connection);
+		return false;
+	}
+	function create_tables(){
+		$connection = connect_db();
+		$data = receive_requests();
+		for ($i=0; $i < count($data); $i++) { 
+			$query = $data[$i]; 
+			$result  = mysqli_query($connection, $query);
+			if (!$result) {
+				die("database query faled.");
+			}
+		}
+		mysqli_close($connection);
 	}
 	//изменения данных страницы профаил
 	function change_profile($photo_name, $title, $article){

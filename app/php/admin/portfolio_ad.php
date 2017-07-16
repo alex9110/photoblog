@@ -6,9 +6,9 @@
 				<div id="fileUpload" class="button">
 					<label><input class="none" name="takeImg" type="file" accept="image/*" id="album_cover" onchange="getFileName ();" ><span>Выбрать</span></label>
 				</div>
-				<input placeholder="названия альбома" maxlength="50" type="text" id="album_name" class="portfolio_input" /> 
+				<input placeholder="названия альбома" maxlength="40" type="text" id="album_name" class="portfolio_input" /> 
 				<div></div>
-				<textarea placeholder="краткое описание альбома" maxlength="60" id="album_desc" class="portfolio_input" cols="40" rows="3"></textarea>
+				<textarea placeholder="краткое описание альбома" maxlength="60" id="album_desc" class="portfolio_input" cols="50" rows="3"></textarea>
 				<input type="button" name="submit" value="сохранить" id="save_album" class="button save" />
 			</div>
 			<div id="preview"></div>

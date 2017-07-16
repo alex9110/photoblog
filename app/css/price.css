@@ -30,9 +30,12 @@
     border-top: 1px dashed  #000; }
   .service .photo {
     background-color: #ccc;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+            background-size: cover;
     float: left;
     height: 500px;
-    width: auto;
+    width: 330px;
     margin: 0px 40px 0px 0; }
   .service .phones {
     display: inline-block;

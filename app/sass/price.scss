@@ -36,9 +36,11 @@
 
 	.photo{
 		background-color: #ccc;
+		background-repeat: no-repeat;
+		background-size: cover;
 		float: left;
 		height: 500px;
-		width: auto;
+		width: 330px;
 		margin: 0px 40px 0px 0;
 	}
 	.phones{

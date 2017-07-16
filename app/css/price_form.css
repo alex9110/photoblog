@@ -5,12 +5,7 @@
   border: 1px solid #F6A419;
   background-color: #fff;
   width: 200px;
-  height: 300px;
-  display: inline-block;
-  -webkit-background-size: contain;
-          background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center; }
+  height: 300px; }
 
 #extra_service {
   border: 1px solid  #F6A419;

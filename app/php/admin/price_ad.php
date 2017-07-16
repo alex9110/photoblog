@@ -41,7 +41,7 @@
 			 ?>	
 		</div>
 		<form id="extra_service">
-			<textarea id="service_desc"  cols="70" rows="7" type="text" placeholder="Укажите список дополнительных услуг, каждый елемент списка необходимо разделять значком слеш /"></textarea>
+			<textarea id="service_desc"  cols="70" rows="7" type="text" placeholder="Укажите список дополнительных услуг, для коректного отображения списка, елементы списка необходимо разделять значком слеш /"></textarea>
 			<input id="service_but" type="button" value="изменить">
 		</form>
 		<?php echo(show_extra_service());?>

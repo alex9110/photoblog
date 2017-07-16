@@ -91,12 +91,20 @@ li{list-style-type: none;}
 #preview{
 	border: 1px solid #F6A419;
 	background-color: #fff;
-	width: 300px;
-	height: 200px;
-	margin: 0 0 -45px 0;
-	display: inline-block;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+	display: inline-block;
+	width: 300px;
+	height: 200px;
+	margin: 0 0 -45px 0;
+	position: relative;
 }
-
+#preview::after{
+	position: absolute;
+	content: "Чем более большое пространстово прямоугольника занимает фото, тем меньшая часть этого фото будет отрезана при выравнивании";
+	color: #757575;
+	font-size: 12px;
+	left:10px;
+	top: 30px;
+}
