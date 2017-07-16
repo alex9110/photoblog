@@ -69,22 +69,8 @@
 		mysqli_close($connection);
 		return false;
 	}
-//подключимся к новосозданной базе
-	function connec_new_db(){
-		$config = config();			//получим настройки для подлючения к базе
-		//создаем подключение к базе
-		$connection = mysqli_connect($config['dbhost'], $dbuser = $config['dbuser'], $dbpass = $config['dbpass'], 'test22'); 
-		// проверяем подключение
-		if (mysqli_connect_errno()) {							//возвращает либо ошибку либо ноль
-			die("DAta basese connection failed: " .
-				mysqli_connect_error() .						//ошмбка
-				")" .mysqli_connect_errno() . ")"				//номерошибки
-			);
-		}
-		return $connection;
-	}
 	function create_tables(){
-		$connection = connec_new_db();
+		$connection = connect_db();
 		$data = receive_requests();
 		for ($i=0; $i < count($data); $i++) { 
 			$query = $data[$i]; 
