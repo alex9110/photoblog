@@ -38,7 +38,6 @@ header{
 	height: 100px;
 	overflow: hidden;
 	width: 100%;
-
 }
 //уберём касячки с хедероа)))
 header:before{
@@ -75,6 +74,10 @@ nav{
 	li{
 		float: left;
 		margin-left: 20px;
+		//color: #464553;
+	}
+	li.active{
+		color: #9C9C9C;
 	}
 }
 .social{
@@ -98,7 +101,6 @@ nav{
 }
 .content{
 	width: 100%;
-	min-height: 100%;
 	position: relative;
 	overflow: hidden;
 }
@@ -156,6 +158,8 @@ footer{
 
 	span{
 		vertical-align: -30px;
+		font-size: 11px;
+		color: #3D3D49;
 	}
 }
 //уберём касячки с футера)))

@@ -1,4 +1,6 @@
 <?php 
+	$title = "Контакты";
+	$whom = 4;
 	require_once("header_ad.php"); 
 ?>
 <link rel="stylesheet" href="../../css/contacts.css">

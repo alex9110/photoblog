@@ -5,12 +5,12 @@
 	}else{redirects();}
 	require_once("../includes/main.php"); 
  ?>
-		<footer
-			<p><span>copyright</span></p>
+		<footer>
+			<p><span><a target="_blank" href="https://www.facebook.com/AlexLychyk">сайт от Aleksandr Lychyk</a></span></p>
 		</footer>
 	</div>
 
 	<script src="../../js/libs.min.js"></script>
-	<script src="../../js/common2.js"></script>
+	<script src="../../js/admin.js"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .photo_uploader {
   border: 1px solid  #F6A419;
   -webkit-border-radius: 8px;
@@ -36,3 +37,24 @@
 
 #save_row:hover {
   background-color: #E98018; }
+
+.loader {
+  background-image: url(../img/loader.gif);
+  -webkit-background-size: cover;
+          background-size: cover;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  display: inline-block;
+  background-color: #fff;
+  height: 30px;
+  width: 30px;
+  display: none; }
+
+.loader::after {
+  content: "Загрузка, подождите!!!";
+  position: absolute;
+  left: 150%;
+  font-size: 12px;
+  color: #3D3D49; }

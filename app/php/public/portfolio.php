@@ -1,4 +1,8 @@
-<?php require_once("header.php");  ?>
+<?php
+	$title = "Портфолио";
+	$whom = 1;
+	 require_once("header.php"); 
+?>
 	<link rel="stylesheet" href="../../css/portfolio.css">
 	<div class="content">
 		<?php  echo( show_woks() );?>

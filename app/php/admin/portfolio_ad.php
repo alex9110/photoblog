@@ -1,4 +1,8 @@
-<?php require_once("header_ad.php"); ?>
+<?php
+	$title = "Портфолио";
+	$whom = 1;
+	 require_once("header_ad.php");
+ ?>
 	<div class="content">
 		<form id="save_form">
 			<div id="desc">
@@ -10,6 +14,7 @@
 				<div></div>
 				<textarea placeholder="краткое описание альбома" maxlength="60" id="album_desc" class="portfolio_input" cols="50" rows="3"></textarea>
 				<input type="button" name="submit" value="сохранить" id="save_album" class="button save" />
+				<span class="loader2"></span>
 			</div>
 			<div id="preview"></div>
 			<script>// скрипт для формы сохранения закладок

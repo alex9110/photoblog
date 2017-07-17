@@ -67,6 +67,8 @@ nav {
   nav li {
     float: left;
     margin-left: 20px; }
+  nav li.active {
+    color: #9C9C9C; }
 
 .social {
   float: left; }
@@ -86,7 +88,6 @@ nav {
 
 .content {
   width: 100%;
-  min-height: 100%;
   position: relative;
   overflow: hidden; }
 
@@ -134,7 +135,9 @@ footer {
   height: 100px;
   position: relative; }
   footer span {
-    vertical-align: -30px; }
+    vertical-align: -30px;
+    font-size: 11px;
+    color: #3D3D49; }
 
 footer:before {
   content: "";

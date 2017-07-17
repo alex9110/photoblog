@@ -1,12 +1,16 @@
+@charset "UTF-8";
 #desc {
   width: 500px; }
 
 #preview {
   width: 220px;
-  height: 280px;
+  height: 255px;
   margin: 0 0 -50px 0;
   display: inline-block;
   -webkit-background-size: contain;
           background-size: contain;
   background-repeat: no-repeat;
   background-position: center; }
+
+#preview::after {
+  content: "ВНИМАНИЕ!!! Фото на данной странице сохраниться с исходными пропорыями, если вы хотите чтобы пропорции были как на демонстрационном фото выберите изображения которое заполнит весь или почти весь прямоугольник. СОВЕТ!!! Если ваша статья будет меньше чем демонстрационная, возможно лучше будет выбрать фото с противополжным соотношениям сторон."; }

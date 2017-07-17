@@ -1,4 +1,6 @@
 <?php 
+	$title = "Главная";
+	$whom = 0;
 	require_once("header.php"); 		//подключим header
 	$config = config();
 ?>		

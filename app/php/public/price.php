@@ -1,4 +1,8 @@
-<?php require_once("header.php"); ?>
+<?php 
+	$title = "Услуги и цены";
+	$whom = 2;
+	require_once("header.php"); 
+?>
 	<link rel="stylesheet" href="../../css/price.css">
 	<div class="content">
 		<div class="service_box">

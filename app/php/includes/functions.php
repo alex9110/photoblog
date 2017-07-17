@@ -327,61 +327,6 @@
 		}
 		return $content;
 	}
-	// function show_prices(){
-	// 	$config = config();
-	// 	$table_name = $config['price'];
-	// 	$data = get_data($table_name);
-	// 	$image_folder =  $config['price_image'];
-
-	// 	$service_name = "";
-	// 	$image_name = "";
-	// 	$li = "";
-	// 	$content = "";
-		
-	// 	$contact_content = "";
-	// 	$phones= get_contacts('phone');
-	// 	//получим наши номера телефонов
-	// 	for ($i=0; $i < count($phones) ; $i++) { 
-	// 		$value = $phones[$i]['value'];
-	// 		$contact_content .= '<div class="tel">'.$value.'<i class="icon-phone"></i></div>';
-	// 	}
-	// 	//если таблица пуста дадим стандартное значение
-	// 	if (count($data)<1) {
-	// 		$content =  '<div class="service">'.
-	// 						'<p class="service_name">названия услуги</p>'.
-	// 						'<img src="'.$image_folder.'example.jpg" class="photo">'.
-	// 							'<div class="desc">'.
-	// 								'<p class="cost">"СТОИМОСТЬ" <br><span>12 000 ₽</span></p>'.
-	// 								'<ul>
-	// 								<li>- первый элемент списка,</li>
-	// 								<li>- второй элемент списка,</li>
-	// 								<li>- третий элемент списка,</li>
-	// 								<li>- какой-то элемент списка,</li>
-	// 								<li>-  последний элемент в данном списке выделяется жирным шрифтом, пример ниже,</li>
-	// 								<li>- детальней за телефонами.</li>
-	// 								</ul>'.
-	// 							'</div>'.
-	// 						'<div class="phones">'.$contact_content.'</div>'.
-	// 					'</div>';
-	// 	}
-	// 	for ($i=0; $i < count($data); $i++) { 
-	// 		$id = 'i'.$data[$i]['id'];
-	// 		$service_name = $data[$i]['service_name'];
-	// 		$cost = $data[$i]['cost'];
-	// 		$image_name = $data[$i]['image_name'];
-	// 		$li = build_list($data[$i]['description']);		
-	// 		$content .= '<div class="service"><span class="delete '.$id.'"></span>'.
-	// 						'<p class="service_name">'.$service_name.'</p>'.
-	// 						'<img src="'.$image_folder.$image_name.'" class="photo">'.
-	// 							'<div class="desc">'.
-	// 								'<p class="cost">"СТОИМОСТЬ" <br><span>'.$cost.'</span></p>'.
-	// 								'<ul>'.$li.'</ul>'.
-	// 							'</div>'.
-	// 						'<div class="phones">'.$contact_content.'</div>'.
-	// 					'</div>';
-	// 	}
-	// 	return $content;
-	// }
 	function show_prices(){
 		$config = config();
 		$table_name = $config['price'];
@@ -558,6 +503,23 @@
 		  $data = $error ? array('error' => 'Ошибка загрузки файлов.') : array('status' => "фото сохранено", 'photo_name'=>$new_name);
 		    return $data;
 	}
+	//записывет инфу о фотках в таблицу БД для временного хранения 
+		function save_info_t($photo_name){
+			$config = config();
+
+			$connection = connect_db();
+
+			//формируем запрос
+			$query = "INSERT INTO {$config['tmp']} (id, name) VALUES (NULL, '$photo_name')";
+			//делаем запрос
+			$result  = mysqli_query($connection, $query);
+
+			if (!$result) {
+		 		die("database query faled.");
+		 	}
+			
+			mysqli_close($connection);
+		}
 	//функцыя новой базы данных
 	function create_db($db_name){
 	    $config = config();     //получим настройки для подлючения
@@ -595,7 +557,7 @@
 		}
 		mysqli_close($connection);
 	}
-	//изменения данных страницы профаил
+	//изменения данных страницы профаил, удаление старых данных тоесть фотки
 	function change_profile($photo_name, $title, $article){
 	    $config = config();
 	    $table_name = $config['profile'];
@@ -603,9 +565,13 @@
 	    $connection = connect_db();
 	   // проверим не наличия записи в нашей таблице 
 	    if ( count($arr) > 0 ) {
-	      $query = "UPDATE {$table_name} SET photo_name = '$photo_name', article_title = '$title', article_text = '$article'"; 
+    		//если запись значит есть фото значит его нужно снести
+    		$old_photo_name = $arr[0]['photo_name'];
+    		$path = $config['avatar'].$old_photo_name;
+	        $query = "UPDATE {$table_name} SET photo_name = '$photo_name', article_title = '$title', article_text = '$article'"; 
+	        unlink($path);
 	    }else{
-	      $query = "INSERT INTO {$table_name} (id, photo_name, article_title, article_text) VALUES (NULL, '$photo_name', '$title', '$article')"; 
+	        $query = "INSERT INTO {$table_name} (id, photo_name, article_title, article_text) VALUES (NULL, '$photo_name', '$title', '$article')"; 
 	    }
 	   
 	    $result  = mysqli_query($connection, $query);
@@ -717,23 +683,7 @@
 			return "вы не загрузили ни одной фотки выберите и загрузите фото";
 		}
 	}
-//записывет инфу о фотках в таблицу БД для временного хранения 
-	function save_info_t($photo_name){
-		$config = config();
 
-		$connection = connect_db();
-
-		//формируем запрос
-		$query = "INSERT INTO {$config['tmp']} (id, name) VALUES (NULL, '$photo_name')";
-		//делаем запрос
-		$result  = mysqli_query($connection, $query);
-
-		if (!$result) {
-	 		die("database query faled.");
-	 	}
-		
-		mysqli_close($connection);
-	}
 	//изменить доп услуги
 	function change_extra_services($text){
 	  $config = config();

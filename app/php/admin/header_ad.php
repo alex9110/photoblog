@@ -3,12 +3,20 @@
 	if ( login_test() ) {
 	}else{redirects();}
 	require_once("../includes/main.php"); 
+	if ($title == null) {
+		$title = "document";
+	}
+	if ($whom == null) {
+		$whom = 0;
+	}
+	$active[$whom] ='class="active"';
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<title>admin_panel</title>
+	<title><?php echo $title; ?></title>
 
 	<link rel="stylesheet" href="../../libs/icons/fontello/css/flickr.css">
 	<link rel="stylesheet" href="../../css/main.css">
@@ -29,11 +37,11 @@
 				<div class="logo"><a href="index_ad.php"><h2>Helena Nazarenko</h2></a></div>
 				<nav>
 					<ul>
-						<li><a href="index_ad.php">Главная</a></li>
-						<li><a href="portfolio_ad.php">Портфолио</a></li>
-						<li><a href="price_ad.php">Услуги и цены</a></li>
-						<li><a href="profile_ad.php">Профайл</a></li>
-						<li><a href="contacts.php">Контакты</a></li>
+						<li <?php echo @$active[0]; ?> ><a href="index_ad.php">Главная</a></li>
+						<li <?php echo @$active[1]; ?> ><a href="portfolio_ad.php">Портфолио</a></li>
+						<li <?php echo @$active[2]; ?> ><a href="price_ad.php">Услуги и цены</a></li>
+						<li <?php echo @$active[3]; ?> ><a href="profile_ad.php">Профайл</a></li>
+						<li <?php echo @$active[4]; ?> ><a href="contacts.php">Контакты</a></li>
 						<li><a href="exit.php">Выход</a></li>
 					</ul>
 				</nav>

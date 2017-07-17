@@ -10,6 +10,8 @@ $(function(){
 	// Вешаем функцию ан событие click и отправляем AJAX запрос с данными файлов
 	 
 	$('#upload_photo').click(function( event ){
+		$('#upload_photo').css({'display': 'none'});
+		$('.loader').css({'display': 'inline-block'});
 	    // Создадим данные формы и добавим в них данные файлов из files
 	    var data = new FormData();
 	    $.each( files, function( key, value ){
@@ -30,24 +32,53 @@ $(function(){
 	                // если Файлы успешно загружены
 	                var photo = data.photo;
 	                $('.temporarily').html(photo);
-	                $(".message").html("Загружены новые фото, можите сохранить данный фоторяд или добавить в него еще фото");
+	                $(".message").html("Загружены новые фото, можите сохранить данный фоторяд или добавить в него ещё фото.");
+	           		//почистим форму
+	           		$(".upload_photo").val("");
+	           		$('.loader').css({'display': 'none'});
+	           		$('#upload_photo').css({'display': 'inline-block'})
 	            }
 	            else{
 	                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+	                alert('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+	                $('.loader').css({'display': 'none'});
+	           		$('#upload_photo').css({'display': 'inline-block'});
 	            }
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){
 	            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+	             alert('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+	             $('.loader').css({'display': 'none'});
+	             $('#upload_photo').css({'display': 'inline-block'});
 	        }
 	    });
 	 
+	});
+	$('#save_row').click(function( event ){
+		var li = $('.temporarily li:not(.message)');
+		if (li.length < 1) {		//если во временном ряде пусто выходим ис функцыи
+			alert('Сначала загрузите фото');
+			//console.log(li);
+			return;
+		}
+		var currentWork = $('.gallery ul:first-child').attr('class'); //узнать клас он же имя текущей таблицы
+		//в случае успеха добавить контент в div с класом gallery
+		$( ".gallery" ).load( '../includes/main.php?save_row='+currentWork+'', function() {
+		  //console.log( "Load was performed." );
+		  //почистим форму
+		  $(".upload_photo").val("");
+		  //выведем сообщение
+		   $('.temporarily').html("Фоторяд сохранен можите выбрать еще.");
+		});
 	});
 //отправка данных для нового фотоальбома
 	$('#album_cover').change(function(){
 	    files = this.files;
 	});
 	$('#save_album').click(function( event ){
-		console.log("clik");
+		$('.loader2').css({'display': 'inline-block'});
+		$('.button').css({'z-index': '-1'});
+
 		var name = $('#album_name').val();
 		var desc = $('#album_desc').val();
 	  
@@ -73,14 +104,17 @@ $(function(){
 	                 console.log(album);
 	                // $('#answer').append(album);
 	                location.reload();
-	                
 	            }
 	            else{
 	                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+	                alert('ОШИБКИ ОТВЕТА сервера: ' + data.error);
+	                location.reload();
 	            }
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){
 	            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+	            alert('ОШИБКИ AJAX запроса: ' + textStatus );
+	            location.reload();
 	        }
 	    });
 	 
@@ -90,6 +124,8 @@ $(function(){
 		    files = this.files;
 		});
 		$('#save_offer').click(function( event ){
+			$('.loader2').css({'display': 'inline-block'});
+			$('.button').css({'z-index': '-1'});
 			var offer_name = $('#offer_name').val();
 			var cost = $('#cost').val();
 			var desc = $('#offer_desc').val();
@@ -119,29 +155,18 @@ $(function(){
 		            }
 		            else{
 		                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+		                alert('ОШИБКИ ОТВЕТА сервера: ' + data.error);
+		                location.reload();
 		            }
 		        },
 		        error: function( jqXHR, textStatus, errorThrown ){
 		            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+		            alert('ОШИБКИ AJAX запроса: ' + textStatus );
+		            location.reload();
 		        }
 		    });
 		});
-	$('#save_row').click(function( event ){
-		var li = $('.temporarily li');
-
-		if (li.length == 0) {		//если во временном ряде пусто выходим ис функцыи
-			alert('сначала загрузите фото');
-			console.log(li);
-			return;
-		}
-		var currentWork =$('.gallery ul:first-child').attr('class'); //узнать клас он же имя текущей таблицы
-		//в случае успеха добавить контент в div с класом gallery
-		$( ".gallery" ).load( '../includes/main.php?save_row='+currentWork+'', function() {
-		  console.log( "Load was performed." );
-		  //выведем сообщение
-		   $('.temporarily').html("Ряд с фотками сохранен можите выбрать еще");
-		});
-	});
+	
 
 	//отправка изменения в категории доп услуги
 	$("#service_but").click(function(event){
@@ -173,6 +198,8 @@ $(function(){
 	    files = this.files;
 	});
 	$('#save_profile').click(function( event ){
+		$('.loader2').css({'display': 'inline-block'});
+		$('.button').css({'z-index': '-1'});
 		console.log("clik");
 		var title = $('#title').val();
 		var article = $('#article').val();
@@ -195,18 +222,21 @@ $(function(){
 	            // Если все ОК
 	            if( typeof data.error === 'undefined' ){
 	                // если Файлы успешно загружены
-	                var data = data.status;
-	                 console.log(data);
-	                // $('#answer').append(album);
-	               // location.reload();
+	                //var data = data.status;
+	                // console.log(data);
+	               	location.reload();
 	                
 	            }
 	            else{
 	                console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+	                alert('ОШИБКИ ОТВЕТА сервера: ' + data.error);
+	                location.reload();
 	            }
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){
 	            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+	            alert('ОШИБКИ AJAX запроса: ' + textStatus );
+	            location.reload();
 	        }
 	    });
 	});

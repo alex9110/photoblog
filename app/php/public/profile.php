@@ -1,4 +1,8 @@
-<?php require_once("header.php"); ?>
+<?php
+	$title = "Профайл";
+	$whom = 3;
+	require_once("header.php");
+?>
 	<link rel="stylesheet" href="../../css/profile.css">
 	<div class="content">
 		<div class="about_me">

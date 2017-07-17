@@ -37,3 +37,22 @@
 #save_row:hover{
 	background-color: #E98018;
 }
+.loader{
+	background-image: url(../img/loader.gif);
+	background-size: cover;
+	border-radius: 50%;
+	position: absolute;
+	left: 50%;
+	display: inline-block;
+	background-color: #fff;
+	height: 30px;
+	width: 30px;
+	display: none;
+}
+.loader::after{
+	content: "Загрузка, подождите!!!";
+	position: absolute;
+	left: 150%;
+	font-size: 12px;
+	color: #3D3D49;
+}

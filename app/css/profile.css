@@ -1,11 +1,14 @@
 .about_me {
   overflow: hidden;
   position: relative;
-  margin: 0 0.5%; }
+  margin: 0 0.5%;
+  margin-top: 5vmin;
+  padding-right: 5%;
+  min-height: 50vmin; }
 
 .avatar {
   background-color: #ccc;
-  margin: 0 2% 1% 0;
+  margin: 0.8% 5% 1% 0;
   float: left;
   width: 500px;
   height: auto; }
@@ -22,7 +25,7 @@
 
 .social2 {
   text-align: center;
-  margin-top: 10px; }
+  margin-top: 50px; }
   .social2 span {
     -webkit-border-radius: 8px;
             border-radius: 8px;

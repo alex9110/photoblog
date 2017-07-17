@@ -1,4 +1,8 @@
-<?php require_once("header_ad.php"); ?>
+<?php
+	$title = "Прфайл";
+	$whom = 3;
+	require_once("header_ad.php");
+?>
 	<link rel="stylesheet" href="../../css/profile_form.css">
 	<div class="content">
 	<form id="save_form">
@@ -11,6 +15,7 @@
 				<div></div>
 				<textarea cols="70" rows="7" placeholder="Статья" maxlength="800" class="portfolio_input" text" id="article"></textarea>
 				<input type="button" name="submit" value="сохранить" id="save_profile" class="save button" />
+				<span class="loader2"></span>
 			</div>	
 			
 			<div id="preview"></div>

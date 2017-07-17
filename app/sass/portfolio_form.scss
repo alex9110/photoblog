@@ -1,6 +1,24 @@
 *{padding: 0;margin: 0;outline: none;}
 li{list-style-type: none;}
-
+.loader2{
+	background-image: url(../img/loader.gif);
+	background-size: cover;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 5px;
+	display: inline-block;
+	background-color: #fff;
+	height: 30px;
+	width: 30px;
+	display: none;
+}
+.loader2::after{
+	content: "Загрузка, подождите!!!";
+	position: absolute;
+	left: 150%;
+	font-size: 12px;
+	color: #3D3D49;
+}
 #save_form{
 	position: relative;
 	border: 1px solid #F6A419;
@@ -13,7 +31,7 @@ li{list-style-type: none;}
 	width: 98%;
 	font-family: Arial, sans-serif;
 	padding: 7px;
-	//overflow: hidden;
+	overflow: hidden;
 	text-align: left;
 }
 #desc{
