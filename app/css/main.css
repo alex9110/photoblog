@@ -23,13 +23,14 @@ body {
   margin: auto;
   background-color: #fff;
   margin-top: 20px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  min-width: 450px; }
 
 header {
   background-color: #F5F9FF;
   position: relative;
   margin-bottom: 20px;
-  height: 100px;
+  min-height: 100px;
   overflow: hidden;
   width: 100%; }
 
@@ -60,15 +61,8 @@ header:after {
 .logo {
   margin-top: 10px;
   margin-bottom: 20px;
-  text-transform: uppercase; }
-
-nav {
-  float: right; }
-  nav li {
-    float: left;
-    margin-left: 20px; }
-  nav li.active {
-    color: #9C9C9C; }
+  text-transform: uppercase;
+  color: #464553; }
 
 .social {
   float: left; }
@@ -78,13 +72,37 @@ nav {
   .social ul li a {
     display: block;
     width: 100%;
-    height: 100%; }
+    height: 100%;
+    color: #464553;
+    -webkit-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms; }
+  .social ul li a:hover {
+    color: #00002F;
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1); }
 
 .social li {
-  margin: 5px;
-  height: 20px;
-  width: 20px;
+  margin: 2px;
+  height: 25px;
+  width: 25px;
   float: left; }
+
+nav {
+  float: right; }
+  nav ul {
+    overflow: hidden; }
+  nav li {
+    float: left;
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #464553; }
+  nav li.active, nav li:hover {
+    color: #000;
+    font-weight: bold; }
 
 .content {
   width: 100%;
@@ -111,7 +129,7 @@ span.delete {
   float: left;
   overflow: hidden;
   position: relative;
-  width: 24%; }
+  width: 99%; }
 
 .gallery-box .heigth {
   height: 0;
@@ -170,3 +188,24 @@ footer:after {
 
 #in:hover {
   cursor: default; }
+
+@media (max-width: 768px) {
+  .logo {
+    float: left; }
+  .social {
+    margin: 14px 0 10px 10px;
+    float: right; }
+  .gallery-box {
+    width: 99% !important; }
+  nav {
+    float: right;
+    width: 100%; }
+    nav ul {
+      display: block;
+      text-align: center; }
+    nav li {
+      float: none;
+      display: inline-block;
+      margin: 0 5% 10px 0; }
+    nav li:last-child {
+      margin: 0; } }

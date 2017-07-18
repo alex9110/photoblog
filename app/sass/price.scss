@@ -60,10 +60,11 @@
 		display: inline-block;
 		text-align: left;
 		margin-top: 20px;
+		//margin-bottom: 100px;
 		max-width: 50%;
-		// max-width: 700px;
 		font-size: 17px;
 		letter-spacing: 1px;
+		font-size: 14px;
 
 		li{
 			margin-bottom: 10px;
@@ -91,6 +92,9 @@
 	margin-bottom: 20px;
 	padding-bottom: 20px;
 	overflow: hidden;
+	ul{
+		max-width: 70%;
+	}
 	h2{
 		margin-top: 20px;
 		margin-bottom: 20px;
@@ -105,4 +109,48 @@
 			letter-spacing: 1px;
 		}
 	}
+}
+@media (max-width: 1200px) {
+	.desc{
+		margin-bottom: 20px;
+	}
+	.phones{
+		
+		width: 100%;
+		padding-left: 370px;
+		text-align: center;
+		.tel{
+			margin: 0;
+			padding-bottom: 0;
+			display: inline-block;
+		}
+	}
+}
+@media (max-width: 820px) {
+	.service{
+		.photo{
+			float: none;
+			margin: 0 auto;
+		}
+	}
+	.desc{
+		display: block;
+		margin: 0 auto;
+		margin-top: 20px;
+		padding-bottom: 30px;
+		max-width: 80%;
+	}
+	.phones{
+		position: static;
+		padding: 0;
+		min-height: 40px;
+		.tel{
+		
+			padding-bottom: 0;
+
+			display: inline-block;
+		}
+
+	}
+	
 }

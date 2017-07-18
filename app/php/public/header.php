@@ -9,7 +9,7 @@
 	$active[$whom] ='class="active"';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title; ?></title>
@@ -23,6 +23,18 @@
 		<header>
 			<div class="header_box">
 				<div class="logo"><a href="index.php"><h2>Helena Nazarenko</h2></a></div>
+				<div class="social">
+					<ul>
+						<?php 
+							$data = get_contacts('social');
+							for ($i=0; $i < count($data) ; $i++) { 
+								$name = $data[$i]['name'];
+								$url = $data[$i]['value'];
+								echo '<li><a href="'.$url.'" target="_blank" ><i class="icon-'.$name.'"></i></a></li>';
+							}
+						 ?>
+					</ul>
+				</div>
 				<nav>
 					<ul>
 						<li <?php echo @$active[0]; ?> ><a href="index.php">Главная</a></li>
@@ -31,17 +43,6 @@
 						<li <?php echo @$active[3]; ?> ><a href="profile.php">Профайл</a></li>
 					</ul>
 				</nav>
-				<div class="social">
-					<ul>
-						<?php 
-							$data = get_contacts('social');
-							for ($i=0; $i < count($data) ; $i++) { 
-								$name = $data[$i]['name'];
-								$url = $data[$i]['value'];
-								echo '<li class="instagram"><a href="'.$url.'" target="_blank" ><i class="icon-'.$name.'"></i></a></li>';
-							}
-						 ?>
-					</ul>
-				</div>
+				
 			</div>
 		</header>

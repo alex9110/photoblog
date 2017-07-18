@@ -42,3 +42,18 @@
 .but:hover{
 	background-color: #E98018;
 }
+@media (max-width:  768px){
+	.content{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.contacts{
+		width: 90%;
+		margin: 1%;
+	}
+	.but{
+		width: 90%;
+		margin-top: 25px;
+		height: 35px;
+	}
+}

@@ -413,7 +413,7 @@
 	}
 	//сформирует контент для страницы профаил
 	function show_profile(){
-		$content = '<img src="../../all_photos/avatar/avatar.jpg" class="avatar">'.
+		$content = '<div class="avatar_box"><img src="../../all_photos/avatar/avatar.jpg" class="avatar"></div>'.
 				'<p class="desk" ><span>Lorem ipsum</span> <br>sit amet, consectetur adipisicing elit. Odit cum eos ex, nihil explicabo maiores totam officia repellendus tenetur magni officiis maxime eum est debitis quos commodi quis aut itaque sed aspernatur, incidunt saepe. Aperiam ea rerum, nihil quae soluta nemo. Hic eaque eligendi, expedita aliquam, reiciendis minima, reprehenderit, illo molestiae dolore explicabo eum numquam? Cum laborum quasi id soluta perspiciatis adipisci, ipsam tenetur cumque incidunt iusto culpa, illum aspernatur similique beatae repudiandae modi quos explicabo laboriosam, tempore nesciunt deleniti eos consequuntur ex placeat. Dignissimos excepturi animi voluptas doloremque eum natus debitis porro beatae, earum nobis, molestiae nemo suscipit. Repellendus?</p>';
 
 		$config = config();

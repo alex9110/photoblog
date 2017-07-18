@@ -52,6 +52,7 @@
 	<meta charset="UTF-8">
 	<title>login</title>
 	<link rel="stylesheet" href="../../css/login_form.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div id="login" class="form">
@@ -63,7 +64,7 @@
 			<input required maxlength="20" id="password" type="password" name="pas" placeholder="Enter password"><br>
 			<input id="submit" type="submit" name="submit" value="Log in">
 		</form>
-		<span id="change" class="сhange" >cменить пароль</span>
+		<span id="change" class="change" >cменить пароль</span>
 	</div>	
 	<div id="new_data" class="form form2">
 		<form action="login.php" method="post">
@@ -85,7 +86,7 @@
 			<input id="save" type="submit" name="save" value="Save">
 
 		</form>
-		<span id="no_change" class="сhange">отмена</span>
+		<span id="no_change" class="change">отмена</span>
 	</div>
 	<script src="../../js/libs.min.js"></script>
 	<script>

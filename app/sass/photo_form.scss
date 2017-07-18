@@ -4,6 +4,7 @@
 	box-shadow: 0px -1px 5px 0px #323232;
 	width: 100%;
 	padding: 10px;
+	position: relative;
 }
 .uploader{
 	box-shadow: -1px 1px 1px 0px #323232;
@@ -26,9 +27,7 @@
 .upload_photo{
 	padding-right: 0;
 }
-#upload_photo{
-	
-}
+
 #save_row{
 	background-color: #DE5217;
 	float: right;
@@ -42,7 +41,7 @@
 	background-size: cover;
 	border-radius: 50%;
 	position: absolute;
-	left: 50%;
+	left: 39%;
 	display: inline-block;
 	background-color: #fff;
 	height: 30px;
@@ -55,4 +54,28 @@
 	left: 150%;
 	font-size: 12px;
 	color: #3D3D49;
+}
+@media (max-width:  768px){
+	.photo_uploader{
+		overflow: hidden;
+		padding: 1%;
+	}
+	.uploader{
+		margin: 0;
+	}
+	.upload_photo{
+		display: block;
+		width: 100%;
+		margin: 0 0 15px 0;
+	}
+	#upload_photo{
+		width: 72%;	
+		text-align: center;
+	}
+	#save_row:hover{
+		width: 20%;
+	}
+	.loader{
+		bottom: 3px;
+	}
 }

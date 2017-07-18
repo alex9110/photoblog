@@ -49,3 +49,11 @@
   height: 100%;
   -webkit-background-size: cover;
           background-size: cover; }
+
+@media (max-width: 768px) {
+  .rubric_box {
+    width: 49%; } }
+
+@media (max-width: 500px) {
+  .rubric_box {
+    width: 99%; } }

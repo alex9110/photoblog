@@ -1,3 +1,6 @@
+.wrapper{
+	min-width: 450px;
+}
 .about_me{
 	overflow: hidden;
 	position: relative;
@@ -6,10 +9,11 @@
 	padding-right: 5%;
 	min-height: 50vmin;
 }
-.avatar{
-	background-color: #ccc;
+.avatar_box{
 	margin: 0.8% 5% 1% 0;
-	float: left;
+	float: left;	
+}
+.avatar{
 	width:500px;
 	height: auto
 }
@@ -88,5 +92,31 @@
 		color: #F5BCE5;
 	}
 }
+@media (max-width: 1000px) {
+	.about_me{
+		padding-right: 0;
+		p{
+			display: block;
+			max-width: 800px;
+			margin: auto;
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+	}
+	.avatar_box{
+		max-width: 800px;
+		margin: 0 auto;
+		float: none;
+	}
+	.avatar{
+		width: 100%;	
+	}
+	.contact{
+		position: static;
+		max-width: 250px;
+		margin: auto;
+		text-align: center;
 
+	}
+}
 

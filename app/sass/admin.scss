@@ -1,10 +1,13 @@
 .admin{
-	 height: 20px;
-	 background-color: #000; 
-	 text-align: center;
-	 color: #fff;
-	 letter-spacing: 2px;
+	height: 20px;
+	background-color: #000; 
+	text-align: center;
+	color: #fff;
+	letter-spacing: 2px;
 
+}
+nav li{
+	font-size: 14px;
 }
 .temporarily{
 	margin: 6px 0;
@@ -73,4 +76,46 @@ span.delete:hover{
 .service span.delete{
 	right: 0.7%;
 	top: 40px;
+}
+
+@media (max-width:  1000px) {
+	.logo{
+		float: left;
+	}
+	.social{
+		margin: 14px 0 10px 10px;
+		float: right;
+	}
+	.gallery-box{
+		width: 99% !important;
+	}
+	nav{
+		float: right;
+		width: 100%;
+		ul{
+			display: block;
+			text-align: center;
+		}
+		li{
+			// text-align: justify;
+			float: none;
+			display: inline-block;
+			margin: 0 5% 10px 0;
+		}
+		li:last-child{
+			margin: 0;
+		}
+		
+	}
+}
+@media (max-width:  768px){
+	span.delete{
+		width: 30px;
+		height: 30px;
+	}
+	span.delete::before{
+		top: 15%;
+		left: 35%;
+		font-size: 15px;
+	}
 }

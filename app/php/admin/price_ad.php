@@ -13,7 +13,7 @@
 			<input placeholder="Названия услуги" maxlength="50" type="text" class="portfolio_input" id="offer_name"/> 
 			<input placeholder="стоимость" maxlength="30" type="text" class="portfolio_input" id="cost"/> 
 			<div></div> 
-			<textarea cols="70" rows="7" placeholder="Описания услуги. ВНИМАНИЕ, для обозначения нового элемента списка, необходимо в начале каждого следующего елемента, кроме самого первого ставить знак слеш / " maxlength="700" class="portfolio_input text" id="offer_desc"></textarea>
+			<textarea cols="70" rows="7" placeholder="Описания услуги. ВНИМАНИЕ, для обозначения нового элемента списка, необходимо в начале каждого следующего элемента, кроме самого первого ставить знак слеш / " maxlength="600" class="portfolio_input text" id="offer_desc"></textarea>
 			<input type="button" name="submit" value="сохранить" id="save_offer" class="save button" />
 			<span class="loader2"></span>
 		</div>	
@@ -46,7 +46,7 @@
 			 ?>	
 		</div>
 		<form id="extra_service">
-			<textarea id="service_desc"  cols="70" rows="7" type="text" placeholder="Укажите список дополнительных услуг, для коректного отображения списка, елементы списка необходимо разделять значком слеш /"></textarea>
+			<textarea  maxlength="1500" id="service_desc"  cols="80" rows="8" type="text" placeholder="Укажите список дополнительных услуг, для коректного отображения списка, елементы списка необходимо разделять значком слеш /"></textarea>
 			<input id="service_but" type="button" value="изменить">
 		</form>
 		<?php echo(show_extra_service());?>
