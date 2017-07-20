@@ -14,9 +14,15 @@
 
 <div class="content">
 	<?php echo ( show_normal_size_photo("temporarily") ); ?>
-	<div class="gallery">
-		
-	<?php echo ( show_photo_r($album) ); ?>
+	<div class="gallery">	
+	<?php echo ( show_photo_r($album, 'last', 1) ); ?>
+	</div>
+	<div id="loadMore">
+		<div>
+			<p class="more">Все фото ...</p>
+			<span class="public_loader"></span>
+			<p class="error"></p>
+		</div>
 	</div>
 </div>
 <?php require_once("footer_ad.php"); ?>

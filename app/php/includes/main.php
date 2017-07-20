@@ -39,18 +39,15 @@ if( isset( $_GET['album_name'] ) ){
 }
 //сохранить ряд с фотками
 if( isset( $_GET['save_row'] ) ){
-    //прилетело имя таблицы с которой выведены текущие фотки, значит в неё мы их и сохраним
-    $table_name =   $_GET['save_row'];
-   $result = move_photo($table_name);
-   if ($result === true) {
-    //если всьо ок построим контент и отддим
-    $content = show_photo_r($table_name);
-   // $result = "успех";
-       echo ($content);
-   }else{
-    echo ($result);
-    }
-} 
+  $data = array();
+  //прилетело имя таблицы с которой выведены текущие фотки, значит в неё мы их и сохраним
+  $table_name =   $_GET['save_row'];
+  $result = move_photo($table_name);
+  $data['result'] = $result;
+
+
+  echo json_encode($data);
+}
 //сохранение новой услуги
 if( isset( $_GET['offer_name'] ) ){
    $config = config();
@@ -163,6 +160,19 @@ if( isset( $_GET['profile'] ) ){
        $data['error'] = 'что пошло не так';
      }
     echo json_encode($data);  
+}
+//подгрузим фоторяды
+if ( isset($_GET['more'])) {
+  $data = array();
+  $table_name =   $_GET['more'];
+  $row = $_GET['row'];
+  $how =  $_GET['how'];
+  if ($how === null) {
+    $how = 2;
+  }
+  $data['content'] = show_photo_r($table_name, $row, $how);
+
+  echo json_encode($data);  
 }
 
 ?>

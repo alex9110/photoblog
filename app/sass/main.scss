@@ -108,9 +108,12 @@ nav{
 		letter-spacing: 1px;
 		color: #464553;
 	}
-	li.active, li:hover{
+	li.active{
 		color: #000;
 		font-weight: bold;
+	}
+	li:hover{
+		color: #000;
 	}
 }
 .content{
@@ -160,7 +163,51 @@ span.delete{
     height: 100%;
     background-size: cover;
  }
-
+#loadMore{
+	min-height: 20px;
+	width: 100%;
+	text-align: center;
+	margin: 20px 0 20px 0;
+	overflow: hidden;
+	position: relative;
+	div{
+		background-color: #F5F9FF;
+		border-radius: 4px;
+		display: inline-block;
+		min-width: 10%;
+		min-height: 20px;
+		padding: 4px 5px 4px 5px;
+		cursor: pointer;
+		letter-spacing: 1px;
+		font-size: 14px;
+		.more{
+			color: #464553;
+		}
+		.error{
+			color: red;
+		}
+	}
+}
+.public_loader{
+	background-image: url(../img/loader.gif);
+	background-size: cover;
+	border-radius: 50%;
+	position: relative;
+	margin-bottom: 10px;
+	display: inline-block;
+	background-color: #fff;
+	height: 30px;
+	width: 30px;
+	display: none;
+}
+.public_loader::after{
+	content: "Загрузка!!!";
+	position: absolute;
+	left: -60%;
+	bottom: -12px;
+	font-size: 12px;
+	color: #3D3D49;
+}
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//
 
 footer{
@@ -237,5 +284,15 @@ footer:after{
 			margin: 0;
 		}
 		
+	}
+	#loadMore{
+		
+		div{
+			min-height: 40px;
+			width: 99%;
+			.more{
+				padding-top: 8px;
+			}
+		}
 	}
 }

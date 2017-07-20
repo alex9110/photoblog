@@ -54,22 +54,42 @@ $(function(){
 	    });
 	 
 	});
+//загрузить все фоторяды
+	$('#loadMore div').click(function add(evt) {
+		addNewContent(0, 0, 'html');
+	});
+//сохранить ряд и показать после сохранения
 	$('#save_row').click(function( event ){
-		var li = $('.temporarily li:not(.message)');
+	 	var li = $('.temporarily li:not(.message)');
 		if (li.length < 1) {		//если во временном ряде пусто выходим ис функцыи
 			alert('Сначала загрузите фото');
 			//console.log(li);
 			return;
 		}
 		var currentWork = $('.gallery ul:first-child').attr('class'); //узнать клас он же имя текущей таблицы
-		//в случае успеха добавить контент в div с класом gallery
-		$( ".gallery" ).load( '../includes/main.php?save_row='+currentWork+'', function() {
-		  //console.log( "Load was performed." );
-		  //почистим форму
-		  $(".upload_photo").val("");
-		  //выведем сообщение
-		   $('.temporarily').html("Фоторяд сохранен можите выбрать еще.");
-		});
+		//в случае успеха добавить данный ряд в div с класом gallery
+		$.ajax({
+		    url: '../includes/main.php?save_row='+currentWork+'',
+		    type: 'GET',
+		   	dataType: 'json',
+		    success: function( data, textStatus, jqXHR ){
+		        // Если ряд сохранен подгрузим его 
+		        if(data.result){
+		        	addNewContent('last', 0);
+		          	  //почистим форму
+      			    $(".upload_photo").val("");
+      			     //выведем сообщение
+      			    $('.temporarily').html("Фоторяд сохранен можите выбрать еще.");
+		        }
+		        else{
+		            alert('Сохранение не удалось');
+		            location.reload();
+		        }
+		    },
+		    error: function( jqXHR, textStatus, errorThrown ){
+		        console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+		    }
+		});	
 	});
 //отправка данных для нового фотоальбома
 	$('#album_cover').change(function(){
@@ -391,5 +411,60 @@ $(function(){
 		});	
 		
 	});
-
+//подгрузка фото /////////////////////////////////////////////////////////////////
+//по умочанию подгружает все оставшися фото ряды на страницу, но в параметрах можно указать с какого ряда начать и сколько рядов подгрузить, а также каким методом добавить
+	
+	function addNewContent(rowsNumber, how, append){
+		if (how === undefined) {
+			how = 0; //все оставшися ряды
+		}
+		
+		$('#loadMore .more').css({'display':'none'});
+		$('#loadMore span').css({'display':'inline-block'});
+		$('#loadMore .error').html('');
+		//текущее количество рядов на странице
+		if (rowsNumber === undefined) {
+			var rowsNumber = $('.gallery ul').length;
+		}
+		
+		 var currentWork = $('.gallery ul:first-child').attr('class'); //узнать клас он же имя текущей таблицы
+		$.ajax({
+		    url: '../includes/main.php?more='+currentWork+'&row='+rowsNumber+'&how='+how+'',
+		    type: 'GET',
+		    dataType: 'json',
+		    success: function( data, textStatus, jqXHR ){
+		        // Если все ОК
+		        if( typeof data.error === 'undefined' ){
+		        	  var cont = data['content'];
+		        	  if (!cont == false) {
+		        	  	if (append === 'html') {
+		        	  		$('.gallery').html(cont);
+		        	  		$('#loadMore .more').html('В этом альбоме больше нет фото.');
+		        	  		$('#loadMore div').css({'cursor':'default'});
+		        	  	}else{
+		        	  		$('.gallery').append(cont);
+		        	  	}
+		        	  	$('#loadMore span').css({'display':'none'});
+		        	  	$('#loadMore .more').css({'display':'inline-block'});
+		        	  }else{
+		        	  	$('#loadMore span').css({'display':'none'});
+		        	  	$('#loadMore .more').css({'display':'inline-block'});
+		        	  	$('#loadMore .more').html('В этом альбоме больше нет фото.');
+		        	  	$('#loadMore div').css({'cursor':'default'});
+		        	  }
+		        }
+		        else{
+		            console.log('ОШИБКИ ОТВЕТА сервера: ' + data.error );
+		            $('#loadMore span').css({'display':'none'});
+		            $('#loadMore .error').html('упс, что-то пошло не так :(<br>Попробовать еще?');
+		        }
+		    },
+		    error: function( jqXHR, textStatus, errorThrown ){
+		        console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+		        $('#loadMore span').css({'display':'none'});
+		        $('#loadMore .error').html('упс, что то пошло не так :(<br>Попробовать еще?');
+		    }
+		});
+	}
+////////////////////////////////////////////////////////////////////////////////
 });
