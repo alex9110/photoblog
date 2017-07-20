@@ -6,7 +6,7 @@
 ?>
 	<div class="content">
 		<div class="gallery">
-			<?php echo ( show_photo($album) ); ?>
+			<?php echo ( show_photo_r($album,1,1) ); ?>
 		</div>
 	</div>
 <?php require_once("footer.php"); ?>
