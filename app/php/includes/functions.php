@@ -441,7 +441,7 @@
 		$table = $config['profile'];
 		$data = get_data($table);
 		if (count($data) > 0) {
-			$content = '<img src="'.$config['avatar'].$data[0]['photo_name'].'" class="avatar">'.
+			$content = '<div class="avatar_box"><img src="'.$config['avatar'].$data[0]['photo_name'].'"class="avatar"></div>'.
 						'<p class="desk" ><span>'.$data[0]['article_title'].'</span><br>'.$data[0]['article_text'].'</p>';
 		}
 
@@ -620,7 +620,7 @@
 		 $new_table = 'work_'.$max_id;
 		 $connection = connect_db(); //подключится к базе
 		 //создадим таблицу для альбома
-		 $query = "CREATE TABLE {$new_table} ( id INT(11) NOT NULL AUTO_INCREMENT ,  name VARCHAR(100) NOT NULL , width DOUBLE NOT NULL , height DOUBLE NOT NULL , PRIMARY KEY (id)) ENGINE = InnoDB"; 
+		 $query = "CREATE TABLE {$new_table} ( id INT(11) NOT NULL AUTO_INCREMENT, name VARCHAR(100) NOT NULL, width DOUBLE NOT NULL, height DOUBLE NOT NULL, PRIMARY KEY (id) )";
 		
 		 $result  = mysqli_query($connection, $query);
 		 //проверяем нет ли ошибок запроса
