@@ -99,10 +99,10 @@
 //все рады если второй параметр не задан или конкретный ряд если зада
 	function get_data($table, $column = '*', $where = false){
 		$connection = connect_db(); //подключится к базе
-		$query = "SELECT {$column} FROM {$table}"; 
+		$query = "SELECT {$column} FROM {$table} ORDER BY id ASC"; 
 		//если задан третий параметр формируем запрос с учетом этого параметра
 		if ($where) {
-			$query = "SELECT {$column} FROM {$table} {$where}";
+			$query = "SELECT {$column} FROM {$table} {$where} ORDER BY id ASC";
 		}
 		$result  = mysqli_query($connection, $query);
 		//проверяем нет ли ошибок запроса
@@ -620,7 +620,7 @@
 		 $new_table = 'work_'.$max_id;
 		 $connection = connect_db(); //подключится к базе
 		 //создадим таблицу для альбома
-		 $query = "CREATE TABLE {$new_table} ( id INT(11) NOT NULL AUTO_INCREMENT, name VARCHAR(100) NOT NULL, width DOUBLE NOT NULL, height DOUBLE NOT NULL, PRIMARY KEY (id) )";
+		 $query = "CREATE TABLE {$new_table} ( id INT(11) NOT NULL AUTO_INCREMENT, name VARCHAR(100) NOT NULL, width DOUBLE NOT NULL, height DOUBLE NOT NULL, PRIMARY KEY (id) )"; 
 		
 		 $result  = mysqli_query($connection, $query);
 		 //проверяем нет ли ошибок запроса
@@ -855,25 +855,32 @@
 		    }
 		}
 		$width_start = 100/$amount - $margin * 2;  //начальная ширина фоток, в процентах без марджина
+		$width_start = round($width_start, 5, PHP_ROUND_HALF_ODD); //округлить до 4 знаков и в меньшую сторону
 		//выровнять все блоки по $max_height с сохранением пропорцый для этого увеличим ширину у низких блоков
 		//узнать во сколько раз необходимо увеличить ширину 
 		$totalWidth = 0;    //сумарная ширина выровняных блоков
 		$i = 0;
 		while (  $i < $amount ) {
 		    $сoeff = $max_height/$new_photo[$i]['prop']; //узнаем в сколько раз самый большой блок высше текущего
+		    $сoeff = round($сoeff, 5, PHP_ROUND_HALF_ODD); //округлить до 4 знаков и в меньшую сторону
 		    // узнать новую ширину текущего блока
 		    // новая ширина блока необходимая для выравнивания его же по высоте с самым высоким
-		    $width[] = $сoeff*$width_start;
+		    // $width[] = $сoeff*$width_start;
+		     $width[] = round($сoeff*$width_start, 5, PHP_ROUND_HALF_ODD); //округлить до 4 знаков и в меньшую сторону
 		    //узнать сумарную ширину всех блоков в процентах после того как они выровнены по высоте
 		    $totalWidth += $width[$i];
 		    $i++;
 		}
 		//узнать в сколько раз ширина родительского блока меньше чем сумма ширин всех блоков, перед этим минус все маржини
 		$mainKof = ( 100-$margin*($amount*2) )/$totalWidth;
+		$mainKof = round($mainKof, 5, PHP_ROUND_HALF_ODD); 
+
 		//умножить ширину каждого блока на получившийся коэфицыент чтобы узнать необходимую правильную ширину для фотки
 		$i = 0;
 		while( $i < $amount ){
-		    $width[$i] = $width[$i] * $mainKof;
+		   // $width[$i] = $width[$i] * $mainKof;
+			//теперь ширина ряда точно не перелетит за 100%
+		    $width[$i] = round($width[$i] * $mainKof, 5, PHP_ROUND_HALF_ODD) - 0.001; 
 		    //формируем ответ
 		 	$info['height'] =  $new_photo[$i]['prop'];
 		 	$info['width'] = $width[$i];
