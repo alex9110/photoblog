@@ -370,7 +370,7 @@
 		if (count($data)<1) {
 			$content =  '<div class="service">'.
 							'<p class="service_name">названия услуги</p>'.
-							'<img src="'.$image_folder.'example.jpg" class="photo">'.
+							'<div class="photo" style="background-image:url('.$image_folder.'example.jpg)"></div>'.
 								'<div class="desc">'.
 									'<p class="cost">"СТОИМОСТЬ" <br><span>12 000 ₽</span></p>'.
 									'<ul>
