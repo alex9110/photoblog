@@ -1,5 +1,4 @@
 <?php
-
 	function config(){	//настройки
 		$data = array(
 			'dbhost'=>"localhost",			//хост

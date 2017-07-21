@@ -232,7 +232,7 @@
 		$li = "";
 		$max = 0;
 		//зададим клас чтобы всекда знать какой именно альбом мы показываем
-		$content ='<ul class="'.$table_name.'"><li class="gallery-box" style="width:44%">'.
+		$content ='<ul id="demo" class="'.$table_name.'"><li class="gallery-box" style="width:44%">'.
 			 		  '<div class="heigth" style="padding-top:66.666%"></div>'.
 			 	 	  '<div class="gallery-box__image" style="background-image: url('.$path.')"></div>'.
 		 		  '</li><p style="margin-top:50px; ">Привет, в этом альбоме пока что нет фото, но это ненадоло)</p></ul>';

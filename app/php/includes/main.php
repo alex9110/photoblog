@@ -102,7 +102,7 @@ if( isset( $_GET['profile'] ) ){
   echo json_encode($data);
 }
 
-//удаления ряда соток
+//удаления ряда фоток
   if( isset($_GET['remove_rov']) ) { 
     $post = $_POST;
     $not_ready_path = $post['path'];

@@ -78,6 +78,7 @@ $(function(){
 		        	addNewContent('last', 0);
 		          	  //почистим форму
       			    $(".upload_photo").val("");
+      			    $('#demo').remove();
       			     //выведем сообщение
       			    $('.temporarily').html("Фоторяд сохранен можите выбрать еще.");
 		        }
@@ -411,14 +412,12 @@ $(function(){
 		});	
 		
 	});
-//подгрузка фото /////////////////////////////////////////////////////////////////
-//по умочанию подгружает все оставшися фото ряды на страницу, но в параметрах можно указать с какого ряда начать и сколько рядов подгрузить, а также каким методом добавить
-	
-	function addNewContent(rowsNumber, how, append){
+
+////подгрузка фото по умочанию подгружает все оставшися фото ряды на страницу, но в параметрах можно указать с какого ряда начать и сколько рядов подгрузить, а также каким методом добавить
+	function addNewContent(rowsNumber, how, metod){
 		if (how === undefined) {
 			how = 0; //все оставшися ряды
 		}
-		
 		$('#loadMore .more').css({'display':'none'});
 		$('#loadMore span').css({'display':'inline-block'});
 		$('#loadMore .error').html('');
@@ -426,8 +425,7 @@ $(function(){
 		if (rowsNumber === undefined) {
 			var rowsNumber = $('.gallery ul').length;
 		}
-		
-		 var currentWork = $('.gallery ul:first-child').attr('class'); //узнать клас он же имя текущей таблицы
+		var currentWork = $('.gallery ul:first-child').attr('class'); //узнать клас он же имя текущей таблицы
 		$.ajax({
 		    url: '../includes/main.php?more='+currentWork+'&row='+rowsNumber+'&how='+how+'',
 		    type: 'GET',
@@ -437,7 +435,7 @@ $(function(){
 		        if( typeof data.error === 'undefined' ){
 		        	  var cont = data['content'];
 		        	  if (!cont == false) {
-		        	  	if (append === 'html') {
+		        	  	if (metod === 'html') {
 		        	  		$('.gallery').html(cont);
 		        	  		$('#loadMore .more').html('В этом альбоме больше нет фото.');
 		        	  		$('#loadMore div').css({'cursor':'default'});
@@ -466,5 +464,5 @@ $(function(){
 		    }
 		});
 	}
-////////////////////////////////////////////////////////////////////////////////
+
 });
