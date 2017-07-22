@@ -235,7 +235,7 @@
 		$content ='<ul id="demo" class="'.$table_name.'"><li class="gallery-box" style="width:44%">'.
 			 		  '<div class="heigth" style="padding-top:66.666%"></div>'.
 			 	 	  '<div class="gallery-box__image" style="background-image: url('.$path.')"></div>'.
-		 		  '</li><p style="margin-top:50px; ">Привет, в этом альбоме пока что нет фото, но это ненадоло)</p></ul>';
+		 		  '</li><p style="margin-top:50px; ">Привет, в этом альбоме пока что нет фото, но это ненадолго)</p></ul>';
 		if (count($data) < 1) {
 			return $content;	 //если альбом пустой вернем стандартное значение			
 		}
