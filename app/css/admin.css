@@ -100,6 +100,8 @@ span.delete:hover {
       margin: 0; } }
 
 @media (max-width: 768px) {
+  .logo {
+    float: none; }
   span.delete {
     width: 30px;
     height: 30px; }

@@ -4,7 +4,10 @@ html{
 body{
 	background: linear-gradient(90deg, #fff, #9A989A);
 	text-align: center;
-	min-width: 450px;
+	min-width: 240px;
+	margin: 0;
+	padding: 0;
+	width: 100%;
 }
 *{
 	box-sizing:border-box;
@@ -32,7 +35,6 @@ body{
 		margin: 0;
 		padding: 0;
 	}
-
 }
 form{
 	width: 80%;
@@ -102,13 +104,13 @@ form{
 	}
 
 }
-@media (max-width:  768px){
+@media (max-width: 768px){
 	.form{
 		margin-top: 10%;
 		width: 80%;
 	}
 }
-@media (max-width:  500px){
+@media (max-width: 366px){
 	.form{
 		width: 90%;
 	}

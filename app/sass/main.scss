@@ -20,7 +20,7 @@ $w:100%;
 
 body{
 	background-color: #fff;
-	// overflow: hidden;
+	//overflow: hidden;
 }
 .wrapper{
 	max-width: 95%;
@@ -29,7 +29,7 @@ body{
 	// overflow: hidden;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	min-width: 450px;
+	min-width: 320px;
 }
 header{
 	background-color: #F5F9FF;
@@ -82,6 +82,7 @@ header:after{
 		height: 100%;
 		color: #464553;
 		transition: 300ms;
+		font-size: 20px;
 	}
 	li a:hover{
 		color: #00002F;
@@ -257,25 +258,44 @@ footer:after{
 	cursor: default;
 }
 @media (max-width:  768px) {
+	header{
+		//padding-bottom: 10px;
+	}
+	.wrapper{
+		width: 100%;
+	}
 	.logo{
-		float: left;
+		margin-top: 5px;
+		margin-bottom: 10px;
+		text-align: center;
+		//float: left;
 	}
 	.social{
-		margin: 14px 0 10px 10px;
-		float: right;
+		width: 100%;
+		text-align: center;
+		ul{
+			display: inline-block;
+		}
+		.social li{
+			margin: 2px;
+			height: 55px;
+			width: 55px;
+			float: left;
+		}
 	}
 	.gallery-box{
 		width: 99% !important;
 	}
 	nav{
+		margin-top: 10px;
 		float: right;
 		width: 100%;
 		ul{
+			margin-bottom: 5px;
 			display: block;
 			text-align: center;
 		}
 		li{
-			// text-align: justify;
 			float: none;
 			display: inline-block;
 			margin: 0 5% 10px 0;
@@ -293,6 +313,17 @@ footer:after{
 			.more{
 				padding-top: 8px;
 			}
+		}
+	}
+}
+@media (max-width: 420px){
+	nav{
+		ul{
+				margin-bottom: 10px;
+		}
+		li{
+			width: 100%;
+			margin-right: 0;
 		}
 	}
 }

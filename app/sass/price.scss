@@ -145,12 +145,33 @@
 		padding: 0;
 		min-height: 40px;
 		.tel{
-		
 			padding-bottom: 0;
-
 			display: inline-block;
 		}
-
+	}
+}
+@media (max-width: 420px){
+	.service{
+		.service_name:before{
+			margin: 0;
+			width: 0;
+			border: 0;
+		}
+		.service_name:after{
+			margin: 0;
+			width: 0;
+			border: 0;
+		}
 	}
 	
+	.desc{
+		display: block;
+		padding-bottom: 70px;
+	}
+	.phones{
+		.tel{
+			display: block;
+			margin-bottom: 5px;
+		}
+	}
 }

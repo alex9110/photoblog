@@ -47,7 +47,7 @@
 	//create_tables();
  ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title>login</title>

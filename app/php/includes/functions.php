@@ -316,7 +316,10 @@
 
 		$folder = $config['аlbum_covers'];
 		$content = '<div class="rubric_box">'.
-						'<img src="'.$path.'example.jpg" class="rubric">'.
+						'<div class="adapt_box">'.
+							'<div class="heigth"></div>'.
+							'<div class="image_box" style="background-image: url('.$path.'example.jpg)"></div>'.
+						'</div>'.
 						'<div class="designation">'.
 							'<h3>Привет</h3>'.
 							'<p>Пока что у тебя нет ни одной работы, но ты можешь добавить их прямо сейчас</p>'.
