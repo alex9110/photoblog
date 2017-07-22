@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Главная</title>
+	<link rel="shortcut icon" href="img/camera.png" type="image/png">
 	<link rel="stylesheet" href="libs/icons/fontello/css/flickr.css">
 	<link rel="stylesheet" href="css/main.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	

@@ -17,7 +17,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title; ?></title>
-
+	<link rel="shortcut icon" href="../../img/camera.png" type="image/png">
 	<link rel="stylesheet" href="../../libs/icons/fontello/css/flickr.css">
 	<link rel="stylesheet" href="../../css/main.css">
 	<link rel="stylesheet" href="../../css/admin.css">
