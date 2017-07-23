@@ -6,7 +6,10 @@
 	require_once("../includes/main.php"); 
  ?>
 		<footer>
-			<p><span><a target="_blank" href="https://www.facebook.com/AlexLychyk">сайт от Aleksandr Lychyk</a></span></p>
+			<a id="author" target="_blank" href="https://www.facebook.com/AlexLychyk">
+				<p>сайт от Aleksandr Lychyk</p>
+				<img src="../../img/external.png" alt="" style="width: 10px; height: auto; margin-left: 4px;">
+			</a>
 		</footer>
 	</div>
 

@@ -21,6 +21,7 @@
 </head>
 <body>
 	<div class="wrapper">
+	<a name="up" style="width: 0; height: 0;"></a>
 		<header>
 			<div class="header_box">
 				<div class="logo"><a href="index.php"><h2>Helena Nazarenko</h2></a></div>
