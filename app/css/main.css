@@ -264,11 +264,11 @@ footer:after {
 #in {
   position: absolute;
   display: block;
-  width: 4%;
-  height: 40%;
+  width: 5%;
+  height: 50%;
   z-index: 100;
-  left: 0%;
-  top: 0px; }
+  right: 0;
+  bottom: 0; }
 
 #in:hover {
   cursor: default; }
@@ -312,8 +312,6 @@ footer:after {
     #loadMore div .more {
       padding-top: 8px; }
   #to_up {
-    width: 30px;
-    height: 30px;
     top: 90%;
     left: 3%; } }
 
