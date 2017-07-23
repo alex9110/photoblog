@@ -1,3 +1,5 @@
 User-agent: *
-Disallow: /admin/
-Disallow: /includes/
+Disallow: /php/admin/
+Disallow: /php/includes/
+Allow: /php/public/
+Allow: index.php
