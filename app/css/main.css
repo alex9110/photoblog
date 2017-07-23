@@ -314,7 +314,7 @@ footer:after {
   #to_up {
     width: 30px;
     height: 30px;
-    bottom: 3%;
+    top: 90%;
     left: 3%; } }
 
 @media (max-width: 420px) {
