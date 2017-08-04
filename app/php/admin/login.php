@@ -8,12 +8,15 @@
 	//$login = mysqli_real_escape_string($connection, $login);  		//экранируем данные только те которые участвуют в запросе к базе
 	//вход админа
 	$data = $_POST;
+
 	if ( isset($data['submit']) ) {
 		$login = $data['login'];
 		$pas = $data['pas'];
 		if ( valid($login, $pas) ) {
 			if (login($login, $pas) ) {
-				session_start();
+				if(!isset($_SESSION)){ 
+					session_start(); 
+				}
 				$_SESSION['user'] = 'admin';
 				header('Location: index_ad.php');
 				exit;
@@ -21,7 +24,7 @@
 		}
 	}
 	//смена логина и пароля
-	$result;
+	$result="";
 	if ( isset($data['save']) ) {
 		$login = trim($data['login']);
 		$pas = trim($data['pas']);

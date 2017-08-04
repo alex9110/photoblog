@@ -110,6 +110,16 @@
 		}
 	}
 }
+footer:after{
+	content: "";
+	background-color: #F5F9FF;
+	display: block;
+	position: absolute;
+	width: 0.5%;
+	height: 100%;
+	right: 0px;
+	top:0px;
+}
 @media (max-width: 1200px) {
 	.desc{
 		margin-bottom: 20px;

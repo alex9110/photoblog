@@ -14,4 +14,4 @@
 		$data[9] = "INSERT INTO main (id, name, password) VALUES (NULL, 'admin', '$hash')";
 		return $data;
 	}
- ?>
+?>

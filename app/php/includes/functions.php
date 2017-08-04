@@ -58,9 +58,12 @@
 	function login_test(){
 	// если у нас есть сессионная кука...
 		if ( !empty($_COOKIE[session_name()]) ) {
-			session_start();
+			if(!isset($_SESSION)){ 
+					session_start(); 
+				}
 			if ( isset($_SESSION['user']) ) {
 				if ($_SESSION['user'] === 'admin') {
+					
 					return true;
 				}
 			}
@@ -894,4 +897,4 @@
 		}
 		return $properties;
 	}
- ?>
+?>
