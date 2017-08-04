@@ -1,11 +1,11 @@
 .service_box{
-	margin: 0 0.5%;
-	width: 100%;
+	width: 99%;
+	margin: 50px 0.5% 20px 0.5%;
 }
 .service{
 	background-color: #F5F9FF;
 	margin: auto;
-	margin: 50px 0px 20px 0px;
+	// margin: 50px 0px 20px 0px;
 	// text-align: center;
 	overflow: hidden;
 	position: relative;
@@ -60,7 +60,6 @@
 		display: inline-block;
 		text-align: left;
 		margin-top: 20px;
-		//margin-bottom: 100px;
 		max-width: 50%;
 		font-size: 17px;
 		letter-spacing: 1px;
@@ -86,9 +85,10 @@
 
 .extra_service{
 	background-color: #F5F9FF;
-	width: 100%;
+	width: 99%;
 	text-align: center;
-	margin: 0 0.5%;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
 	margin-bottom: 20px;
 	padding-bottom: 20px;
 	overflow: hidden;
@@ -109,16 +109,6 @@
 			letter-spacing: 1px;
 		}
 	}
-}
-footer:after{
-	content: "";
-	background-color: #F5F9FF;
-	display: block;
-	position: absolute;
-	width: 0.5%;
-	height: 100%;
-	right: 0px;
-	top:0px;
 }
 @media (max-width: 1200px) {
 	.desc{
