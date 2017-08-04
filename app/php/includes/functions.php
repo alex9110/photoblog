@@ -2,6 +2,7 @@
 	require_once("config.php");   //подключим настройки
 //из строки создает список li елементов регулируеться /
 		function build_list($text){
+			$arr = array();
 			$li = '';
 				if ($text !="") {
 					$arr = array();                               		 // создам массив он мне нужен 
@@ -520,7 +521,7 @@
 		 	$file = 0;
 		    // переместим файлы из временной директории в указанную
 		    foreach( $_FILES as $file ){
-		    	$count ++;
+		    	//$count ++;
 		    	 $new_name = rename_photo($file['name']);		//получим новое имя для фото
 		        if( move_uploaded_file( $file['tmp_name'], $uploaddir . $new_name ) ){
 		        }

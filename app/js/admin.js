@@ -122,8 +122,8 @@ $(function(){
 	            if( typeof data.error === 'undefined' ){
 	                // если Файлы успешно загружены
 	                var album = data.status;
-	                 console.log(album);
-	                // $('#answer').append(album);
+	                 //console.log(data);
+	                 //$('#answer').append(album);
 	                location.reload();
 	            }
 	            else{
@@ -134,7 +134,7 @@ $(function(){
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){
 	            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-	            alert('ОШИБКИ AJAX запроса: ' + textStatus );
+	            alert('ОШИБКИ AJAX запроса: 1 ' + textStatus );
 	            location.reload();
 	        }
 	    });
@@ -170,7 +170,7 @@ $(function(){
 		            if( typeof data.error === 'undefined' ){
 		                // если Файлы успешно загружены
 		              	var status = data.status;
-		              	 console.log(status);
+		              	 //console.log(data);
 		              	 //$('#answer').append(status);
 		              	location.reload();        
 		            }
@@ -182,7 +182,7 @@ $(function(){
 		        },
 		        error: function( jqXHR, textStatus, errorThrown ){
 		            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-		            alert('ОШИБКИ AJAX запроса: ' + textStatus );
+		            alert('ОШИБКИ AJAX запроса: 2' + textStatus );
 		            location.reload();
 		        }
 		    });
@@ -221,7 +221,6 @@ $(function(){
 	$('#save_profile').click(function( event ){
 		$('.loader2').css({'display': 'inline-block'});
 		$('.button').css({'z-index': '-1'});
-		console.log("clik");
 		var title = $('#title').val();
 		var article = $('#article').val();
 	  
@@ -244,7 +243,8 @@ $(function(){
 	            if( typeof data.error === 'undefined' ){
 	                // если Файлы успешно загружены
 	                //var data = data.status;
-	                // console.log(data);
+
+	                //console.log(data);
 	               	location.reload();
 	                
 	            }
@@ -256,7 +256,7 @@ $(function(){
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){
 	            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-	            alert('ОШИБКИ AJAX запроса: ' + textStatus );
+	            alert('ОШИБКИ AJAX запроса: 3' + textStatus );
 	            location.reload();
 	        }
 	    });

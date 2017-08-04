@@ -13,6 +13,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title; ?></title>
+  <meta name="keywords" content=""/>
+	<meta name="description" content="Приветствую вас, дорогие друзья! Меня зовут Елена Назаренко, я профессиональный фотограф. Специализируюсь на семейной, свадебной и портретной фотографии. Если вам нужны красивые, качественные фотографии, то вам стоит обратиться ко мне. Вы получите массу позитивных эмоций от нашей совместной работы, ведь фотографии, которые вы получите в результате, будут радовать вас долгие годы!"/>
 	<link rel="shortcut icon" href="../../img/camera.png" type="image/png">
 	<link rel="stylesheet" href="../../libs/icons/fontello/css/flickr.css">
 	<link rel="stylesheet" href="../../css/main.css">

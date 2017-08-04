@@ -27,7 +27,7 @@ if( isset( $_GET['album_name'] ) ){
     if ( count($_FILES) > 0) {
       $data = save_title_photo($uploaddir);
       //если ошибок нет
-      if (!$data['error']) {
+      if (!isset($data['error']) ) {
       	$result = сreate_album($data['photo_name'], $title, $desc);
         //если создание не удалось запишим ошибку
       	if ($result == false) {
@@ -59,7 +59,7 @@ if( isset( $_GET['offer_name'] ) ){
     if ( count($_FILES) > 0) {
         $data = save_title_photo($config['price_image']);
         
-        if (!$data['error']) {
+        if ( !isset($data['error']) ) {
           $result = create_offer($data['photo_name'], $offer_name, $cost, $desc);
           if ($result == false) {
             $data['error'] = 'не удалось создать предложения'; 
@@ -91,8 +91,9 @@ if( isset( $_GET['profile'] ) ){
     if ( count($_FILES) > 0) {
       $data = save_title_photo($uploaddir);
       //если ошибок нет
-      if (!$data['error']) {
+      if ( !isset($data['error']) ) {
         $result = change_profile($data['photo_name'], $title, $article);
+        $data['status'] = "Сохранено";
         //если создание не удалось запишим ошибку
         if ($result == false) {
           $data['error'] = 'не удалось создать альбом'; 
