@@ -98,6 +98,7 @@
 // функцыя вернет двохуровневый массив записей с БД
 //все рады если второй параметр не задан или конкретный ряд если зада
 	function get_data($table, $column = '*', $where = false){
+		$data = array();
 		$connection = connect_db(); //подключится к базе
 		$query = "SELECT {$column} FROM {$table} ORDER BY id ASC"; 
 		//если задан третий параметр формируем запрос с учетом этого параметра
