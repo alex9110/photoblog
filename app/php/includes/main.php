@@ -167,13 +167,11 @@ if ( isset($_GET['more'])) {
   $data = array();
   $table_name =   $_GET['more'];
   $row = $_GET['row'];
-  $how =  $_GET['how'];
-  if ($how === null) {
-    $how = 2;
-  }
+  @$how =  $_GET['how'];
+    if ($how === null) {
+      $how = 2;
+    }
   $data['content'] = show_photo_r($table_name, $row, $how);
-
   echo json_encode($data);  
 }
-
 ?>
