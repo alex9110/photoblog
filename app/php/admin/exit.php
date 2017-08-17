@@ -4,6 +4,6 @@
 		//очистим сесию
 		$_SESSION = [];
 	}
-	header('Location: ../public/index.php');
+	header('Location:/index.php');
 	exit;
  ?>

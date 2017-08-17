@@ -41,7 +41,7 @@ $(function(){
 			 var rowsNumber = $('.gallery ul').length;
 			 var currentWork = $('.gallery ul:first-child').attr('class'); //узнать клас он же имя текущей таблицы
 			$.ajax({
-			    url: '../includes/main.php?more='+currentWork+'&row='+rowsNumber+'',
+			    url: '/php/includes/main.php?more='+currentWork+'&row='+rowsNumber+'',
 			    type: 'GET',
 			    dataType: 'json',
 			    success: function( data, textStatus, jqXHR ){

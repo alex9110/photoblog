@@ -1,4 +1,4 @@
-<?php require_once("../includes/functions.php"); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT']."/php/includes/functions.php");?>
 <?php 
 	if ($title == null) {
 		$title = "document";
@@ -18,15 +18,14 @@
 	<link rel="shortcut icon" href="../../img/camera.png" type="image/png">
 	<link rel="stylesheet" href="../../libs/icons/fontello/css/flickr.css">
 	<link rel="stylesheet" href="../../css/main.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 </head>
 <body>
 	<div class="wrapper">
 	<a name="up" style="width: 0; height: 0;"></a>
 		<header>
 			<div class="header_box">
-				<div class="logo"><a href="index.php"><h2>Helena Nazarenko</h2></a></div>
+				<div class="logo"><a href="/index.php"><h2>Helena Nazarenko</h2></a></div>
 				<div class="social">
 					<ul>
 						<?php 
@@ -41,10 +40,10 @@
 				</div>
 				<nav>
 					<ul>
-						<li <?php echo @$active[0]; ?> ><a href="index.php">Главная</a></li>
-						<li <?php echo @$active[1]; ?> ><a href="portfolio.php">Портфолио</a></li>
-						<li <?php echo @$active[2]; ?> ><a href="price.php">Услуги и цены</a></li>
-						<li <?php echo @$active[3]; ?> ><a href="profile.php">Профайл</a></li>
+						<li <?php echo @$active[0]; ?> ><a href="/index.php">Главная</a></li>
+						<li <?php echo @$active[1]; ?> ><a href="/php/public/portfolio.php">Портфолио</a></li>
+						<li <?php echo @$active[2]; ?> ><a href="/php/public/price.php">Услуги и цены</a></li>
+						<li <?php echo @$active[3]; ?> ><a href="/php/public/profile.php">Профайл</a></li>
 					</ul>
 				</nav>
 				
