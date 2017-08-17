@@ -1,7 +1,6 @@
 .rubric_box {
   background-color: #fff;
   width: 32.3333%;
-  min-height: 300px;
   margin: 0.5%;
   position: relative;
   float: left; }
@@ -14,9 +13,7 @@
 
 .designation {
   text-align: center;
-  height: 120px;
-  margin-top: 10px;
-  margin-bottom: 10px; }
+  margin-top: 10px; }
   .designation h3 {
     letter-spacing: 1px;
     font-weight: normal;

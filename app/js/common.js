@@ -75,4 +75,17 @@ $(function(){
 			});
 		}
 	}
+	function changeBlocSize(){
+		var maxHeight = 0;
+		var descList = $('.rubric_box .designation');
+		descList.each(function(){
+			var currentHeight = $(this).height(); 
+			if (maxHeight < currentHeight) {
+				maxHeight = currentHeight;
+			}
+		});
+		descList.height(maxHeight); 
+	}
+	changeBlocSize();
+
 });
