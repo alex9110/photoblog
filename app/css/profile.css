@@ -60,7 +60,7 @@
     font-size: 20px; }
 
 .tel {
-  color: #F5BCE5;
+  color: #464553;
   font-size: 25px;
   margin-bottom: 15px;
   position: relative; }
@@ -80,7 +80,7 @@
   .mail p {
     font-weight: bold;
     font-size: 20px;
-    color: #F5BCE5; }
+    color: #464553; }
 
 @media (max-width: 1000px) {
   .about_me {
