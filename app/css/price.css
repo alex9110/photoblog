@@ -5,6 +5,7 @@
 .service {
   background-color: #F5F9FF;
   margin: auto;
+  margin-bottom: 20px;
   overflow: hidden;
   position: relative; }
   .service .service_name {
