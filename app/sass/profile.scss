@@ -25,7 +25,7 @@
 
 	span{
 		display: inline-block;
-		max-width: 40vw;
+		max-width: 35vw;
 		margin-bottom: 20px;
 		font-size: 30px;
 		text-align: left;
@@ -120,6 +120,11 @@
 		margin: auto;
 		text-align: center;
 
+	}
+	.desk{
+		span{
+			max-width: 100%;
+		}
 	}
 }
 
